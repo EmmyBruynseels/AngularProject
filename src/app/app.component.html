@@ -6,6 +6,8 @@
           [routerLinkActiveOptions]="{ exact: true }">Security/login</a>
         <a mat-list-item routerLink="/signup" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">signup</a>
+        <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">dashboard</a>
 
         <mat-divider></mat-divider>
         <a mat-list-item class="menu">
@@ -24,6 +26,16 @@
         </a>
         <a mat-list-item routerLink="/addpoll" routerLinkActive="active" class="submenu"
           [routerLinkActiveOptions]="{ exact: true }">Uitnodigen</a>
+
+		  <mat-divider></mat-divider>
+        
+        <a mat-list-item *ngIf="currentUser">
+				
+          <mat-icon svgIcon="account" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+          <p> {{currentUser.username}}</p>
+            <button mat-raised-button color="primary" (click)="logoff()">Logout</button>
+        </a>
+
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

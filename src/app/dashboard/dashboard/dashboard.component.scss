@@ -1,7 +1,6 @@
 .polls-card,
 .friends-card {
-  width: 90%;
-  margin: auto;
+  width: 45%;
 }
 
 .example-card {
@@ -11,4 +10,11 @@
 .add {
   position: absolute;
   right: 10%;
+}
+
+#dashboard {
+  display: flex;
+  justify-content: space-around;
+  align-items:  flex-start;
+
 }

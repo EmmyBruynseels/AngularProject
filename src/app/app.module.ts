@@ -24,26 +24,42 @@ import { UserModule } from './users/user.module';
 import { CreatePollComponent } from './add-polls/create-poll/create-poll.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { SharedModule } from './shared/shared.module';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { FacebookModule } from './security/facebook.module';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AuthGuard } from './security/guards/auth.guard';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: SecurityComponent
   },
-  { path: 'security',
-   component: SecurityComponent },
-  { path: 'poll', 
-  component: PollComponent },
-  { path: 'addpoll',
-   component: CreatePollComponent },
-  { path: 'vote',
-   component: VoteComponent },
-  { path: 'signup', component: SignupComponent }
+  {
+    path: 'security',
+    component: SecurityComponent
+  },
+  {
+    path: 'poll',
+    component: PollComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'addpoll',
+    component: CreatePollComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'vote',
+    component: VoteComponent, canActivate: [AuthGuard]
+  },
+  { path: 'signup', component: SignupComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
     //SignupComponent
     //PollComponent,
     //VoteComponent
@@ -61,15 +77,22 @@ const appRoutes: Routes = [
     AddPollModule,
     VoteModule,
     UserModule,
-    SharedModule
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    FacebookModule
   ],
   providers: [
     {
-      provide: [HTTP_INTERCEPTORS, STEPPER_GLOBAL_OPTIONS],
+      provide: HTTP_INTERCEPTORS,
       useClass: SecurityInterceptor,
-      multi: true,
-      useValue: { showError: true }
-    }],
+      multi: true
+    },
+    {
+     provide: STEPPER_GLOBAL_OPTIONS,
+       useValue: { showError: true }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

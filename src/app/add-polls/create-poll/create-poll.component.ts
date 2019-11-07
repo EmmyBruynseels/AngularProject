@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Poll } from 'src/app/polls/models/poll.model';
 import { PollService } from 'src/app/polls/poll.service';
-import { Antwoord2 } from 'src/app/polls/models/antwoord.model';
+import { Antwoord2, Antwoord3 } from 'src/app/polls/models/antwoord.model';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { PollGebruiker2 } from 'src/app/polls/models/poll-gebruiker.model';
 
 @Component({
   selector: 'app-create-poll',
@@ -18,7 +19,10 @@ export class CreatePollComponent implements OnInit {
   addAntwoordFormGroup: FormGroup;
   pollToAdd: Poll;
   addedPoll: Poll;
-  antwoordToAdd: Antwoord2;
+  antwoordToAdd: Antwoord3;
+  pgToAdd: PollGebruiker2;
+
+  userID: number;
 
   constructor(private _formBuilder: FormBuilder, private _pollService: PollService,private router: Router,iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 
@@ -46,12 +50,20 @@ export class CreatePollComponent implements OnInit {
     this._pollService.addPoll(this.pollToAdd).subscribe(
       poll => {
         this.addedPoll = poll;
+        this.userID = +localStorage.getItem("userID");
+        this.pgToAdd = new PollGebruiker2(this.addedPoll.pollID, this.userID, true )
+        this._pollService.addPollGebruiker(this.pgToAdd).subscribe(
+          pg => {
+            console.log(pg);
+          });
       });
+      
+     
   }
 
   createAntwoord() {
     const { antwoord } = this.addAntwoordFormGroup.value;
-    this.antwoordToAdd = new Antwoord2(antwoord, this.addedPoll.pollID);
+    this.antwoordToAdd = new Antwoord3(antwoord, this.addedPoll.pollID);
     this._pollService.addAntwoord(this.antwoordToAdd).subscribe(
       antwoord => console.log(antwoord)
     );
@@ -63,14 +75,14 @@ export class CreatePollComponent implements OnInit {
   }
 
   addAntwoord() {
-    const { naam } = this.addAntwoordFormGroup.value;
-    this.antwoordToAdd = new Antwoord2(naam, this.addedPoll.pollID);
+    const { antwoord } = this.addAntwoordFormGroup.value;
+    this.antwoordToAdd = new Antwoord3(antwoord, this.addedPoll.pollID);
     this._pollService.addAntwoord(this.antwoordToAdd).subscribe(
       antwoord => {
         console.log(antwoord);
-        this.router.navigate(['/poll']);
       });
   }
+
   sendToDashboard() {
     this.router.navigate(['/poll']);
   }

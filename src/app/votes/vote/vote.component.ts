@@ -41,8 +41,8 @@ export class VoteComponent implements OnInit {
 
   stem(antwoordID: number) {
     console.log(antwoordID);
-    //userID nog toe te voegen
-    this.stemToAdd = new Stem2(antwoordID,1);
+    var userID = localStorage.getItem("userID");
+    this.stemToAdd = new Stem2(antwoordID, +userID);
     console.log(this.stemToAdd);
     this._pollService.addStem(this.stemToAdd).subscribe(
       stem =>{ 

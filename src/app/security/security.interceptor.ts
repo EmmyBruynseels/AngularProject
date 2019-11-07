@@ -33,6 +33,9 @@ export class SecurityInterceptor implements HttpInterceptor {
       });
 
     }
+
+
+
     return next.handle(request).pipe(
 
       catchError(err => {
@@ -42,7 +45,11 @@ export class SecurityInterceptor implements HttpInterceptor {
           this._router.navigate(['security']);
 
         }
+
         return throwError("unauthorized");
+
       }));
+
   }
+
 }
