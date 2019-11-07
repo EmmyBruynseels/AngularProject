@@ -1,0 +1,6 @@
+<p>{{poll.naam}}</p>
+<ul>
+    <li *ngFor="let item of poll.antwoorden">{{item.naam}}
+        <button mat-raised-button color="primary" (click)="stem(item.antwoordID)">Stem</button>
+    </li>
+</ul>

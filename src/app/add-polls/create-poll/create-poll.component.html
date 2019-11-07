@@ -1,0 +1,44 @@
+<!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>-->
+
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  
+  <mat-step [stepControl]="addPollFormGroup">
+    <form [formGroup]="addPollFormGroup">
+      <ng-template matStepLabel>Name of Poll:</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="naam" required>
+      </mat-form-field>
+      <div>
+        <button mat-button color="accent" matStepperNext (click)="createPoll()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="addAntwoordFormGroup">
+    <form [formGroup]="addAntwoordFormGroup">
+      <ng-template matStepLabel>Antwoorden toevoegen</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="antwoord" formControlName="antwoord" required>
+      </mat-form-field>
+      <div>
+        <button mat-button color="accent" (click)="createAntwoord()" [disabled]="!addAntwoordFormGroup.valid">(Nog een antwoord) toevoegen</button>
+        <button mat-button matStepperNext (click)="addAntwoord()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Vrienden uitnodigen</ng-template>
+    <p>Nog maken</p><p>Bottom sheet - nieuwe uitnodigen - vriend</p>
+    <div>
+      <button mat-button color="accent" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Bekijk poll</ng-template>
+    You are now done.
+    <div>
+      <button mat-button color="accent"  (click)="sendToDashboard()">Klaar</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

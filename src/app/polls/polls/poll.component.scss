@@ -1,0 +1,20 @@
+.polls-card,
+.friends-card {
+  width: 45%;
+}
+
+.example-card {
+  margin: 10px !important;
+}
+
+.add {
+  position: absolute;
+  right: 10%;
+}
+
+#dashboard {
+  display: flex;
+  justify-content: space-around;
+  align-items:  flex-start;
+
+}
