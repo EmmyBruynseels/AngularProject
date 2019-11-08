@@ -25,10 +25,6 @@ import { CreatePollComponent } from './add-polls/create-poll/create-poll.compone
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { SharedModule } from './shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
-import { FacebookModule } from './security/facebook.module';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthGuard } from './security/guards/auth.guard';
 
 const appRoutes: Routes = [

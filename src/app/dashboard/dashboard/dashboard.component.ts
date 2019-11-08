@@ -15,6 +15,8 @@ export class DashboardComponent implements OnInit {
 
   polls: Observable<Poll[]>;
   poll: Poll2[];
+  pollsAdmin: Poll2[];
+  pollsUser: Poll2[];
   friends: User[];
   requests: User[];
   friendToAccept: Friend;
@@ -25,6 +27,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this._pollService.getPolls().subscribe(poll => {
       this.poll = poll;
+    });
+    this._pollService.getPollsAdmin().subscribe( p => {
+      this.pollsAdmin = p ;
+    });
+    this._pollService.getPollsUitgenodigd().subscribe( p => {
+      this.pollsUser = p;
     });
     this._pollService.getFriends().subscribe(friend => {
       this.friends = friend;

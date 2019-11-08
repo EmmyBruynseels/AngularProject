@@ -9,9 +9,29 @@
       <p><button class="add" mat-raised-button color="primary" (click)="goToAddPoll()">New Poll</button></p>
     </mat-card-header>
     <mat-card-content>
+      Eigen Polls
+      <div *ngFor="let p of pollsAdmin">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>{{p.naam}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-list>
+              <mat-list-item *ngFor="let a of p.antwoorden">{{a.naam}} ({{a.stemmen.length}})</mat-list-item>
+            </mat-list>
 
+            <mat-divider></mat-divider>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="vote(p.pollID)">Vote</button>
+          </mat-card-actions>
+        </mat-card>
 
-      <div *ngFor="let p of poll">
+      </div>
+      
+      Uitgenodigd voor Poll
+      <div *ngFor="let p of pollsUser">
         <mat-card class="example-card">
           <mat-card-header>
             <mat-card-title>{{p.naam}}</mat-card-title>

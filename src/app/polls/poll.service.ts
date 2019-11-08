@@ -17,14 +17,22 @@ export class PollService {
   constructor(private http: HttpClient) { }
 
   getPolls(): Observable<Poll2[]> {
-   /* return this.http.get<Poll2[]>("https://localhost:5001/api/poll", {
-      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
-    });*/
+    /* return this.http.get<Poll2[]>("https://localhost:5001/api/poll", {
+       headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
+     });*/
     var userID = localStorage.getItem("userID");
     return this.http.get<Poll2[]>("https://localhost:5001/api/Poll/polls?userID=" + +userID);
   }
-  getPoll(pollID:number) {
-    return this.http.get<Poll>("https://localhost:5001/api/Poll/" +pollID
+  getPollsAdmin() {
+    var userID = localStorage.getItem("userID");
+    return this.http.get<Poll2[]>("https://localhost:5001/api/Poll/pollsAdmin?userID=" + +userID);
+  }
+  getPollsUitgenodigd() {
+    var userID = localStorage.getItem("userID");
+    return this.http.get<Poll2[]>("https://localhost:5001/api/Poll/pollsUser?userID=" + +userID);
+  }
+  getPoll(pollID: number) {
+    return this.http.get<Poll>("https://localhost:5001/api/Poll/" + pollID
     );
   }
 
@@ -46,14 +54,14 @@ export class PollService {
     return this.http.get<Stem[]>("https://localhost:5001/api/stem");
   }
 
-  addPollGebruiker(pg: PollGebruiker2){
+  addPollGebruiker(pg: PollGebruiker2) {
     return this.http.post<PollGebruiker2>("https://localhost:5001/api/pollgebruiker", pg);
   }
 
-  getUser(userID : number) {
+  getUser(userID: number) {
     return this.http.get<User>("https://localhost:5001/api/user/" + userID);
   }
-  addUser(user: User){
+  addUser(user: User) {
     return this.http.post<User>("https://localhost:5001/api/user", user);
   }
 
@@ -61,18 +69,18 @@ export class PollService {
     const userID = localStorage.getItem("userID");
     return this.http.get<User[]>("https://localhost:5001/api/Friend/friendRequests?userID=" + +userID);
   }
-  getFriends(){
+  getFriends() {
     const userID = localStorage.getItem("userID");
     return this.http.get<User[]>("https://localhost:5001/api/Friend/friends?userID=" + +userID);
-   }
+  }
   getFriendAndRequest() {
     const userID = localStorage.getItem("userID");
     return this.http.get<User[]>("https://localhost:5001/api/Friend/allForUser?userID=" + +userID);
   }
-  getFriend(friendID : number){
+  getFriend(friendID: number) {
     return this.http.get<Friend>("https://localhost:5001/api/Friend/" + friendID);
-  } 
-  updateFriend(friend : Friend){
+  }
+  updateFriend(friend: Friend) {
     return this.http.put<Friend>("https://localhost:5001/api/Friend/" + friend.friendID, friend);
   }
 }
