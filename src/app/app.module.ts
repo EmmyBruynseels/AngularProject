@@ -77,10 +77,7 @@ const appRoutes: Routes = [
     AddPollModule,
     VoteModule,
     UserModule,
-    SharedModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    FacebookModule
+    SharedModule
   ],
   providers: [
     {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { Poll } from '../models/poll.model';
+import { Poll, Poll2 } from '../models/poll.model';
 import { PollService } from '../poll.service';
 import { Router } from '@angular/router';
 import { Antwoord } from '../models/antwoord.model';
+import { Stem2 } from '../models/stem.model';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { Antwoord } from '../models/antwoord.model';
 export class PollComponent implements OnInit {
 
   polls: Observable<Poll[]>;
-  poll: Poll[];
+  poll: Poll2[];
+  stemToAdd: Stem2;
   constructor(private _pollService: PollService, private router: Router) {
   }
 
@@ -40,4 +42,15 @@ export class PollComponent implements OnInit {
     this.router.navigate(['/addpoll']);
   }
 
+  stem(antwoordID: number) {
+    console.log(antwoordID);
+    var userID = localStorage.getItem("userID");
+    this.stemToAdd = new Stem2(antwoordID, +userID);
+    console.log(this.stemToAdd);
+    this._pollService.addStem(this.stemToAdd).subscribe(
+      stem =>{ 
+        console.log(stem);
+        this.router.navigate(['/poll']);
+      });
+  }
 }

@@ -6,6 +6,7 @@ import { Antwoord, Antwoord2, Antwoord3 } from './models/antwoord.model';
 import { Stem2, Stem } from './models/stem.model';
 import { PollGebruiker2 } from './models/poll-gebruiker.model';
 import { User2, User } from '../users/models/user.model';
+import { Friend } from '../users/models/friend.model';
 
 
 @Injectable({
@@ -56,13 +57,23 @@ export class PollService {
     return this.http.post<User>("https://localhost:5001/api/user", user);
   }
 
-  /*updatePoll(pollID: number, poll: Poll) {
-    return this.http.put<Poll>("https://localhost:5001/api/poll/" + pollID, poll, {
-      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
-    });
+  getFriendRequests() {
+    const userID = localStorage.getItem("userID");
+    return this.http.get<User[]>("https://localhost:5001/api/Friend/friendRequests?userID=" + +userID);
   }
-
-  deletePoll(pollID: number) {
-    return this.http.delete<Poll>("https://localhost:5001/api/poll/" + pollID);
-  }*/
+  getFriends(){
+    const userID = localStorage.getItem("userID");
+    return this.http.get<User[]>("https://localhost:5001/api/Friend/friends?userID=" + +userID);
+   }
+  getFriendAndRequest() {
+    const userID = localStorage.getItem("userID");
+    return this.http.get<User[]>("https://localhost:5001/api/Friend/allForUser?userID=" + +userID);
+  }
+  getFriend(friendID : number){
+    return this.http.get<Friend>("https://localhost:5001/api/Friend/" + friendID);
+  } 
+  updateFriend(friend : Friend){
+    return this.http.put<Friend>("https://localhost:5001/api/Friend/" + friend.friendID, friend);
+  }
 }
+

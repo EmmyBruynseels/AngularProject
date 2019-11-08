@@ -8,6 +8,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import {MatCardModule} from '@angular/material/card';
     MatGridListModule,
     MatStepperModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -34,7 +36,8 @@ import {MatCardModule} from '@angular/material/card';
     MatGridListModule,
     MatStepperModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule { }
