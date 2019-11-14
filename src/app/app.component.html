@@ -24,7 +24,12 @@
           <mat-icon svgIcon="friends" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
           <p>Friends</p>
         </a>
-        <a mat-list-item routerLink="/addpoll" routerLinkActive="active" class="submenu"
+        <a mat-list-item routerLink="/friend" routerLinkActive="active" class="submenu"
+        [routerLinkActiveOptions]="{ exact: true }">Friends</a>
+        <a mat-list-item routerLink="/request" routerLinkActive="active" class="submenu"
+        [routerLinkActiveOptions]="{ exact: true }">Requests</a>
+
+        <a mat-list-item routerLink="/invite" routerLinkActive="active" class="submenu"
           [routerLinkActiveOptions]="{ exact: true }">Uitnodigen</a>
 
 		  <mat-divider></mat-divider>

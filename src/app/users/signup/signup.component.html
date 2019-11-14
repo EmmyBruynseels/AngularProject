@@ -28,6 +28,7 @@
           </mat-form-field>
         </p>
         <p><button mat-raised-button color="accent" type="submit" [disabled]="!createUserform.valid">Submit</button>
+          <p *ngIf="melding">{{melding}}</p>
       </form>
     </mat-card-content>
     <mat-card-actions>

@@ -9,6 +9,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -24,7 +25,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatStepperModule,
     MatIconModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ],
   exports: [
     MatButtonModule,
@@ -37,7 +39,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatStepperModule,
     MatIconModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

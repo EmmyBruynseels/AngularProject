@@ -26,6 +26,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { SharedModule } from './shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AuthGuard } from './security/guards/auth.guard';
+import { FriendComponent } from './users/friend/friend.component';
+import { FriendrequestComponent } from './users/friendrequest/friendrequest.component';
+import { InviteComponent } from './users/invite/invite.component';
 
 const appRoutes: Routes = [
   {
@@ -49,16 +52,16 @@ const appRoutes: Routes = [
     component: VoteComponent, canActivate: [AuthGuard]
   },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'friend', component: FriendComponent, canActivate: [AuthGuard] },
+  { path: 'request', component: FriendrequestComponent, canActivate: [AuthGuard] },
+  { path: 'invite', component: InviteComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent
-    //SignupComponent
-    //PollComponent,
-    //VoteComponent
   ],
   imports: [
     BrowserModule,

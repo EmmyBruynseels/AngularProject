@@ -18,6 +18,8 @@ export class PollComponent implements OnInit {
 
   polls: Observable<Poll[]>;
   poll: Poll2[];
+  pollsAdmin: Poll2[];
+  pollsUser: Poll2[];
   stemToAdd: Stem2;
   constructor(private _pollService: PollService, private router: Router) {
   }
@@ -27,6 +29,12 @@ export class PollComponent implements OnInit {
     this._pollService.getPolls().subscribe(poll => {
       console.log(poll);
       this.poll = poll;
+    });
+    this._pollService.getPollsAdmin().subscribe( p => {
+      this.pollsAdmin = p ;
+    });
+    this._pollService.getPollsUitgenodigd().subscribe( p => {
+      this.pollsUser = p;
     });
   }
 
