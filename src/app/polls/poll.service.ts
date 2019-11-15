@@ -86,6 +86,9 @@ export class PollService {
   getFriend(friendID: number) {
     return this.http.get<Friend>("https://localhost:5001/api/Friend/" + friendID);
   }
+  getAllFriends() {
+    return this.http.get<Friend[]>("https://localhost:5001/api/Friend");
+  }
   updateFriend(friend: Friend) {
     return this.http.put<Friend>("https://localhost:5001/api/Friend/" + friend.friendID, friend);
   }

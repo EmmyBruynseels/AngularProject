@@ -4,7 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PollService } from 'src/app/polls/poll.service';
 import { User, User2 } from '../models/user.model';
 import { send } from 'q';
-import { Friend2 } from '../models/friend.model';
+import { Friend2, Friend } from '../models/friend.model';
 
 @Component({
   selector: 'app-invite',
@@ -20,6 +20,7 @@ export class InviteComponent implements OnInit {
   userToAdd : User;
   friendToAdd : Friend2;
   melding: String;
+  friendBestaatAl: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private _pollService: PollService, private router: Router) { }
 
@@ -56,10 +57,23 @@ export class InviteComponent implements OnInit {
 
   sendFriendRequest(friendID) {
     let userID = localStorage.getItem("userID");
-    this.friendToAdd = new Friend2(+userID,friendID,false);
-    this._pollService.addFriend(this.friendToAdd).subscribe(f => {
-      console.log(f);
-    });
-  }
 
+    this._pollService.getAllFriends().subscribe(f => {
+      let friends: Friend[] = f;
+      friends.map( friend => {
+        if((friend.ontvangerID == friendID || friend.senderID == friendID) && (friend.senderID == +userID || friend.ontvangerID == +userID) ) {
+          this.friendBestaatAl = true;
+        }
+      });
+      if (this.friendBestaatAl == false){
+        this.friendToAdd = new Friend2(+userID,friendID,false);
+        this._pollService.addFriend(this.friendToAdd).subscribe(f => {
+          console.log(f);
+        });
+      }
+      else{
+        this.melding = "Friend bestaat al";
+      }
+     });
+  }
 }

@@ -21,22 +21,7 @@ export class VoteComponent implements OnInit {
 
   ngOnInit() {
     console.log(history.state.data.poll);
-    this.poll = history.state.data.poll;
-
-    this._pollService.getAntwoorden().subscribe(
-      antwoord => {
-        this.alleAntwoorden = antwoord;        
-    }); 
-    this.alleAntwoorden.map(a => {
-      if (a.poll.pollID == this.poll.pollID){
-        this.antwoordenBijPoll.push(a);
-      }
-    });
-
-    this._pollService.getAntwoorden().subscribe(
-      antwoord => {
-        this.alleAntwoorden = antwoord;        
-    }); 
+    this.poll = history.state.data.poll;   
   }
 
   stem(antwoordID: number) {

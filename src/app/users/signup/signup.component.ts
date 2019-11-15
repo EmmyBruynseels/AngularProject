@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
   users: User[];
   userNodig: User;
   melding: String;
+  meldingPassword: String;
 
   createUserform = this.fb.group({
     username: ['', Validators.required],
@@ -34,42 +35,46 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    const { username, email, password } = this.createUserform.value;
-    let gelukt: boolean = false;
-    this._pollService.getUsers().subscribe(u => {
-      this.users = u;
-      this.users.map(user => {
-        if (user.email == email) {
-          if (user.password == "" || user.password == null) {
-            //signup -> update
-            this.userToAdd = new User(user.userID, username, user.email, password, user.token);
-            this._pollService.updateUser(this.userToAdd).subscribe( u => {
-              console.log(user);
+    const { username, email, password, repeatPassword } = this.createUserform.value;
+    if (password == repeatPassword) {
+      let gelukt: boolean = false;
+      this._pollService.getUsers().subscribe(u => {
+        this.users = u;
+        this.users.map(user => {
+          if (user.email == email) {
+            if (user.password == "" || user.password == null) {
+              //signup -> update user
+              this.userToAdd = new User(user.userID, username, user.email, password, user.token);
+              this._pollService.updateUser(this.userToAdd).subscribe(u => {
+                console.log(user);
+                gelukt = true;
+              });
+            }
+            else if (user.password != "" || user.password != null) {
+              this.melding = "User bestaat al, ga naar login";
               gelukt = true;
-            });
+            }
           }
-          else if (user.password != "" || user.password != null) {
-            this.melding = "User bestaat al, ga naar login";
-            gelukt = true;
-          }
+        });
+        if (gelukt = false) {
+          this.userToAdd = new User(0, username, email, password, null);
+          //user toevoegen
+          console.log("userToAdd", this.userToAdd);
+          this._pollService.addUser(this.userToAdd).subscribe(
+            user => {
+              console.log("subscribe", user);
+            }
+          );
         }
       });
-      if (gelukt = false) {
-        this.userToAdd = new User(0, username, email, password, null);
-  
-            console.log("userToAdd", this.userToAdd);
-            this._pollService.addUser(this.userToAdd).subscribe(
-              user => {
-                console.log("subscribe", user);
-              }
-            );
-      }
-    });
-    
+    }
+    else {
+      this.meldingPassword = "Wachtwoorden komen niet overeen!";
+    }
   }
 
-goToLogin() {
-  this.router.navigate(['/security']);
-}
+  goToLogin() {
+    this.router.navigate(['/security']);
+  }
 
 }

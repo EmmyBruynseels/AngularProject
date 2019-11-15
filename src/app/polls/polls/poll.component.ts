@@ -27,11 +27,10 @@ export class PollComponent implements OnInit {
   ngOnInit() {
     
     this._pollService.getPolls().subscribe(poll => {
-      console.log(poll);
       this.poll = poll;
     });
     this._pollService.getPollsAdmin().subscribe( p => {
-      this.pollsAdmin = p ;
+      this.pollsAdmin = p;
     });
     this._pollService.getPollsUitgenodigd().subscribe( p => {
       this.pollsUser = p;
@@ -43,7 +42,7 @@ export class PollComponent implements OnInit {
     this._pollService.getPoll(id).subscribe(poll => {
       console.log(poll);
       this.router.navigate(['/vote'],{state: {data: {poll: poll}}});
-    })
+    });
   }
 
   goToAddPoll() {
@@ -59,6 +58,13 @@ export class PollComponent implements OnInit {
       stem =>{ 
         console.log(stem);
         this.router.navigate(['/poll']);
+        
+        this._pollService.getPollsAdmin().subscribe( p => {
+          this.pollsAdmin = p;
+        });
+        this._pollService.getPollsUitgenodigd().subscribe( p => {
+          this.pollsUser = p;
+        });
       });
   }
 }
