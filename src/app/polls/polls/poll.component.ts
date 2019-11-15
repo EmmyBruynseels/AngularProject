@@ -25,46 +25,24 @@ export class PollComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this._pollService.getPolls().subscribe(poll => {
       this.poll = poll;
     });
-    this._pollService.getPollsAdmin().subscribe( p => {
+    this._pollService.getPollsAdmin().subscribe(p => {
       this.pollsAdmin = p;
     });
-    this._pollService.getPollsUitgenodigd().subscribe( p => {
+    this._pollService.getPollsUitgenodigd().subscribe(p => {
       this.pollsUser = p;
     });
   }
 
-  vote(id: number) {
-    console.log(id);
-    this._pollService.getPoll(id).subscribe(poll => {
-      console.log(poll);
-      this.router.navigate(['/vote'],{state: {data: {poll: poll}}});
-    });
+  vote(poll: Poll2) {
+    console.log(poll);
+    this.router.navigate(['/vote'], { state: { data: { poll: poll } } });
   }
 
   goToAddPoll() {
     this.router.navigate(['/addpoll']);
-  }
-
-  stem(antwoordID: number) {
-    console.log(antwoordID);
-    var userID = localStorage.getItem("userID");
-    this.stemToAdd = new Stem2(antwoordID, +userID);
-    console.log(this.stemToAdd);
-    this._pollService.addStem(this.stemToAdd).subscribe(
-      stem =>{ 
-        console.log(stem);
-        this.router.navigate(['/poll']);
-        
-        this._pollService.getPollsAdmin().subscribe( p => {
-          this.pollsAdmin = p;
-        });
-        this._pollService.getPollsUitgenodigd().subscribe( p => {
-          this.pollsUser = p;
-        });
-      });
   }
 }

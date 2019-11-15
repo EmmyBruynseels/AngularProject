@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
       this.poll = poll;
     });
     this._pollService.getPollsAdmin().subscribe( p => {
+      console.log(p);
       this.pollsAdmin = p ;
     });
     this._pollService.getPollsUitgenodigd().subscribe( p => {
@@ -42,13 +43,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  vote(id: number) {
-    console.log(id);
-    this._pollService.getPoll(id).subscribe(poll => {
-      console.log(poll);
-      //this.router.navigate(['/vote'],{state: {data: {poll: poll}}});
-    })
-
+  vote(poll: Poll2) {
+    console.log(poll);
+    this.router.navigate(['/vote'], { state: { data: { poll: poll } } });
   }
   goToAddPoll() {
     this.router.navigate(['/addpoll']);

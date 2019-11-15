@@ -6,6 +6,6 @@ export class Stem {
     }
 }
 export class Stem2 {
-    constructor(public antwoordID: number, public userID: number){
+    constructor(public stemID : number,public antwoordID: number, public userID: number){
     }
 }

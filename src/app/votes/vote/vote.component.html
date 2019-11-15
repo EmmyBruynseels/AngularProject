@@ -5,14 +5,16 @@
   <mat-card-content>
     <mat-divider></mat-divider>
     <mat-list>
-
-      <mat-list-item *ngFor="let item of poll.antwoorden">{{item.naam}}
-        <button mat-raised-button color="primary" (click)="stem(item.antwoordID)">Stem</button>
+      <mat-list-item *ngFor="let a of poll.antwoorden">{{a.naam}} ({{a.stemmen.length}})
+        <mat-progress-bar mode="determinate" value="{{ a.stemmen.length/totaalStemmen*100 | number }}"></mat-progress-bar>
+        <button [disabled]="gestemd" mat-raised-button color="primary" (click)="stem(a.antwoordID)">Stem</button>
+        <mat-divider></mat-divider>
       </mat-list-item>
     </mat-list>
 
     <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions>
+      <button [disabled]="!gestemd" mat-raised-button color="primary" (click)="stemAnnuleren()">Stem annuleren</button>
   </mat-card-actions>
 </mat-card>
