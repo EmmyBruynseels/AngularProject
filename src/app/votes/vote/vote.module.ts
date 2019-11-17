@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule} from '@angular/material/form-field';import { SharedModule } from 'src/app/shared/shared.module';
 import { VoteComponent } from './vote.component';
 import { MatButtonModule } from '@angular/material/button';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -15,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    FlexLayoutModule
   ]
 })
 export class VoteModule { }

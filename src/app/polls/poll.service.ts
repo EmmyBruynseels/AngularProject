@@ -14,7 +14,17 @@ import { Friend, Friend_dto } from '../users/models/friend.model';
 })
 export class PollService {
 
+  poll: Poll_dto;
+
   constructor(private http: HttpClient) { }
+
+  getPollDashboard() {
+    return this.poll;
+  }
+  
+  setPollDashboard(poll: Poll_dto) {
+    this.poll = poll;
+  }
 
   getPolls(): Observable<Poll_dto[]> {
     /* return this.http.get<Poll2[]>("https://localhost:5001/api/poll", {

@@ -28,7 +28,6 @@
               <button mat-raised-button color="accent" (click)="vote(p)">Vote</button>
             </mat-card-actions>
           </mat-card>
-
         </div>
       </mat-card>
 
@@ -65,7 +64,8 @@
         <p>Friends</p>
       </mat-card-title>
       <br>
-      <p><button class="add" mat-raised-button color="primary" (click)="goToInviteFriend()">Vriend uitnodigen</button></p>
+      <p><button class="add" mat-raised-button color="primary" (click)="goToInviteFriend()">Vriend uitnodigen</button>
+      </p>
     </mat-card-header>
     <mat-card-content>
       Friends
@@ -73,7 +73,7 @@
         <mat-list-item *ngFor="let f of userFriends">{{f.username}}</mat-list-item>
       </mat-list>
 
-        <p matBadge="{{requests.length}}" matBadgePosition="before" matBadgeOverlap="false">Requests</p>
+      <p matBadge="{{requests.length}}" matBadgePosition="before" matBadgeOverlap="false">Requests</p>
       <mat-list>
         <mat-list-item *ngFor="let r of requests">
           <p>{{r.sender.username}}</p>

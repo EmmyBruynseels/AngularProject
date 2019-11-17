@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Stem_dto } from 'src/app/polls/models/stem.model';
 import { Antwoord } from 'src/app/polls/models/antwoord.model';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/users/models/user.model';
 
 @Component({
   selector: 'app-vote',
@@ -19,12 +20,14 @@ export class VoteComponent implements OnInit {
   antwoordenBijPoll: Antwoord[];
   gestemd : boolean = false;
   totaalStemmen : number = 0;
+  users: User[] = [];
 
   constructor(private _pollService: PollService, private router: Router) {   }
 
   ngOnInit() {
     //console.log(history.state.data.poll);
-    this.poll = history.state.data.poll;   
+    this.poll = this._pollService.getPollDashboard();
+    console.log(this.poll);
     this.poll.antwoorden.map(a => {
       a.stemmen.map(s => {
         this.totaalStemmen++;
@@ -33,10 +36,14 @@ export class VoteComponent implements OnInit {
         }
       });
     });
+    this.poll.users.map( u => {
+      this._pollService.getUser(u.userID).subscribe( user => {
+        this.users.push(user);
+      });
+    });
   }
 
   stem(antwoordID: number) {
-    
     var userID = localStorage.getItem("userID");
     this.stemToAdd = new Stem_dto(0, antwoordID, +userID);
     console.log(antwoordID);

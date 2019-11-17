@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./friendrequest.component.scss']
 })
 export class FriendrequestComponent implements OnInit {
-  requests: User[];
+  requests: Friend[];
   friendToAccept: Friend;
   constructor(private _pollService: PollService, private router: Router) { }
 
