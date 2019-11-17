@@ -4,7 +4,7 @@ export class User {
 }
 
 
-export class User2 {
+export class User_dto {
     constructor(public username: string, public email: string,public password: string){
     }
 }

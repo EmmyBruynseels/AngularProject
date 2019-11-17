@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { Poll, Poll2 } from '../models/poll.model';
+import { Poll, Poll_dto } from '../models/poll.model';
 import { PollService } from '../poll.service';
 import { Router } from '@angular/router';
 import { Antwoord } from '../models/antwoord.model';
-import { Stem2 } from '../models/stem.model';
+import { Stem_dto } from '../models/stem.model';
 
 
 @Component({
@@ -17,10 +17,10 @@ import { Stem2 } from '../models/stem.model';
 export class PollComponent implements OnInit {
 
   polls: Observable<Poll[]>;
-  poll: Poll2[];
-  pollsAdmin: Poll2[];
-  pollsUser: Poll2[];
-  stemToAdd: Stem2;
+  poll: Poll_dto[];
+  pollsAdmin: Poll_dto[];
+  pollsUser: Poll_dto[];
+  stemToAdd: Stem_dto;
   constructor(private _pollService: PollService, private router: Router) {
   }
 
@@ -37,7 +37,7 @@ export class PollComponent implements OnInit {
     });
   }
 
-  vote(poll: Poll2) {
+  vote(poll: Poll_dto) {
     console.log(poll);
     this.router.navigate(['/vote'], { state: { data: { poll: poll } } });
   }

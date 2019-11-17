@@ -1,4 +1,4 @@
-import { Antwoord, Antwoord2 } from './antwoord.model';
+import { Antwoord, Antwoord_dto } from './antwoord.model';
 import { User } from 'src/app/users/models/user.model';
 
 export class Poll {
@@ -6,7 +6,7 @@ export class Poll {
     }
 }
 
-export class Poll2 {
-    constructor(public pollID: number, public naam: string, public antwoorden : Antwoord2[], public users: User[]){
+export class Poll_dto {
+    constructor(public pollID: number, public naam: string, public antwoorden : Antwoord_dto[], public users: User[]){
     }
 }

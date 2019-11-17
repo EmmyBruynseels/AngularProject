@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Poll, Poll2 } from './models/poll.model';
+import { Poll, Poll_dto } from './models/poll.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Antwoord, Antwoord2, Antwoord3 } from './models/antwoord.model';
-import { Stem2, Stem } from './models/stem.model';
-import { PollGebruiker2 } from './models/poll-gebruiker.model';
-import { User2, User } from '../users/models/user.model';
-import { Friend, Friend2 } from '../users/models/friend.model';
+import { Antwoord, Antwoord_dto, Antwoord_dto2 } from './models/antwoord.model';
+import { Stem_dto, Stem } from './models/stem.model';
+import { PollGebruiker_dto } from './models/poll-gebruiker.model';
+import { User_dto, User } from '../users/models/user.model';
+import { Friend, Friend_dto } from '../users/models/friend.model';
 
 
 @Injectable({
@@ -16,20 +16,20 @@ export class PollService {
 
   constructor(private http: HttpClient) { }
 
-  getPolls(): Observable<Poll2[]> {
+  getPolls(): Observable<Poll_dto[]> {
     /* return this.http.get<Poll2[]>("https://localhost:5001/api/poll", {
        headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
      });*/
     var userID = localStorage.getItem("userID");
-    return this.http.get<Poll2[]>("https://localhost:5001/api/Poll/polls?userID=" + +userID);
+    return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll/polls?userID=" + +userID);
   }
   getPollsAdmin() {
     var userID = localStorage.getItem("userID");
-    return this.http.get<Poll2[]>("https://localhost:5001/api/Poll/pollsAdmin?userID=" + +userID);
+    return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll/pollsAdmin?userID=" + +userID);
   }
   getPollsUitgenodigd() {
     var userID = localStorage.getItem("userID");
-    return this.http.get<Poll2[]>("https://localhost:5001/api/Poll/pollsUser?userID=" + +userID);
+    return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll/pollsUser?userID=" + +userID);
   }
   getPoll(pollID: number) {
     return this.http.get<Poll>("https://localhost:5001/api/Poll/" + pollID
@@ -43,22 +43,22 @@ export class PollService {
   getAntwoorden(): Observable<Antwoord[]> {
     return this.http.get<Antwoord[]>("https://localhost:5001/api/antwoord");
   }
-  addAntwoord(antwoord: Antwoord3) {
-    return this.http.post<Antwoord3>("https://localhost:5001/api/antwoord", antwoord);
+  addAntwoord(antwoord: Antwoord_dto2) {
+    return this.http.post<Antwoord_dto2>("https://localhost:5001/api/antwoord", antwoord);
   }
 
-  addStem(stem: Stem2) {
-    return this.http.post<Stem2>("https://localhost:5001/api/stem", stem);
+  addStem(stem: Stem_dto) {
+    return this.http.post<Stem_dto>("https://localhost:5001/api/stem", stem);
   }
   getStemmen(): Observable<Stem[]> {
     return this.http.get<Stem[]>("https://localhost:5001/api/stem");
   }
   deleteStem(stemID: number){
-    return this.http.delete<Stem2>("https://localhost:5001/api/Stem/" + stemID);
+    return this.http.delete<Stem_dto>("https://localhost:5001/api/Stem/" + stemID);
   }
 
-  addPollGebruiker(pg: PollGebruiker2) {
-    return this.http.post<PollGebruiker2>("https://localhost:5001/api/pollgebruiker", pg);
+  addPollGebruiker(pg: PollGebruiker_dto) {
+    return this.http.post<PollGebruiker_dto>("https://localhost:5001/api/pollgebruiker", pg);
   }
 
   getUser(userID: number) {
@@ -76,11 +76,11 @@ export class PollService {
 
   getFriendRequests() {
     const userID = localStorage.getItem("userID");
-    return this.http.get<User[]>("https://localhost:5001/api/Friend/friendRequests?userID=" + +userID);
+    return this.http.get<Friend[]>("https://localhost:5001/api/Friend/friendRequests?userID=" + +userID);
   }
   getFriends() {
     const userID = localStorage.getItem("userID");
-    return this.http.get<User[]>("https://localhost:5001/api/Friend/friends?userID=" + +userID);
+    return this.http.get<Friend[]>("https://localhost:5001/api/Friend/friends?userID=" + +userID);
   }
   getFriendAndRequest() {
     const userID = localStorage.getItem("userID");
@@ -99,8 +99,8 @@ export class PollService {
     return this.http.delete<Friend>("https://localhost:5001/api/Friend/" + friendID);
   }
 
-  addFriend(friend: Friend2) {
-    return this.http.post<Friend2>("https://localhost:5001/api/Friend", friend);
+  addFriend(friend: Friend_dto) {
+    return this.http.post<Friend_dto>("https://localhost:5001/api/Friend", friend);
   }
 }
 

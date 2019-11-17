@@ -4,12 +4,12 @@
         <p>Friends</p>
       </mat-card-title>
       <br>
-      <p><button class="add" mat-raised-button color="primary">Vriend uitnodigen</button></p>
+      <p><button class="add" mat-raised-button color="primary" (click)="goToInviteFriend()">Vriend uitnodigen</button></p>
     </mat-card-header>
     <mat-card-content>
       Friends
       <mat-list>
-        <mat-list-item *ngFor="let f of friends">{{f.sender.username}} - {{f.ontvanger.username}} </mat-list-item>
+        <mat-list-item *ngFor="let f of userFriends">{{f.username}}</mat-list-item>
       </mat-list>
 
     </mat-card-content>

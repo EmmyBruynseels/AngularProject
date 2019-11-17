@@ -5,7 +5,7 @@ export class Stem {
     constructor(public stemID: number,public antwoordID: number,public userID: number, public antwoord: Antwoord, public user: User){
     }
 }
-export class Stem2 {
+export class Stem_dto {
     constructor(public stemID : number,public antwoordID: number, public userID: number){
     }
 }

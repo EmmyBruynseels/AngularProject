@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Poll, Poll2 } from 'src/app/polls/models/poll.model';
+import { Poll, Poll_dto } from 'src/app/polls/models/poll.model';
 import { PollService } from 'src/app/polls/poll.service';
 import { Router } from '@angular/router';
-import { Stem2 } from 'src/app/polls/models/stem.model';
+import { Stem_dto } from 'src/app/polls/models/stem.model';
 import { Antwoord } from 'src/app/polls/models/antwoord.model';
 import { Observable } from 'rxjs';
 
@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class VoteComponent implements OnInit {
 
-  stemToAdd: Stem2;
-  poll: Poll2;
+  stemToAdd: Stem_dto;
+  poll: Poll_dto;
   alleAntwoorden : Antwoord[];
   antwoordenBijPoll: Antwoord[];
   gestemd : boolean = false;
@@ -38,7 +38,7 @@ export class VoteComponent implements OnInit {
   stem(antwoordID: number) {
     
     var userID = localStorage.getItem("userID");
-    this.stemToAdd = new Stem2(0, antwoordID, +userID);
+    this.stemToAdd = new Stem_dto(0, antwoordID, +userID);
     console.log(antwoordID);
     console.log(this.stemToAdd);
     this._pollService.addStem(this.stemToAdd).subscribe(

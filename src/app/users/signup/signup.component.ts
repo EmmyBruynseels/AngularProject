@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
-import { User2, User } from '../models/user.model';
+import { User_dto, User } from '../models/user.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PollService } from 'src/app/polls/poll.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  user2ToAdd: User2;
+  user2ToAdd: User_dto;
   userToAdd: User;
 
   users: User[];

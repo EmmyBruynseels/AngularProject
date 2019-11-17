@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Poll, Poll2 } from 'src/app/polls/models/poll.model';
+import { Poll, Poll_dto } from 'src/app/polls/models/poll.model';
 import { PollService } from 'src/app/polls/poll.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/users/models/user.model';
@@ -14,12 +14,13 @@ import { Friend } from 'src/app/users/models/friend.model';
 export class DashboardComponent implements OnInit {
 
   polls: Observable<Poll[]>;
-  poll: Poll2[];
-  pollsAdmin: Poll2[];
-  pollsUser: Poll2[];
-  friends: User[];
-  requests: User[];
+  poll: Poll_dto[];
+  pollsAdmin: Poll_dto[];
+  pollsUser: Poll_dto[];
+  friends: Friend[];
+  requests: Friend[];
   friendToAccept: Friend;
+  userFriends: User[] = [];
 
   constructor(private _pollService: PollService, private router: Router) {
   }
@@ -37,13 +38,21 @@ export class DashboardComponent implements OnInit {
     });
     this._pollService.getFriends().subscribe(friend => {
       this.friends = friend;
+      this.friends.map(f => {
+        if (f.ontvangerID.toString() == localStorage.getItem("userID")) {
+          this.userFriends.push(f.sender);
+        }
+        else {
+          this.userFriends.push(f.ontvanger);
+        }
+      })
     });
     this._pollService.getFriendRequests().subscribe(fr => {
       this.requests = fr;
     })
   }
 
-  vote(poll: Poll2) {
+  vote(poll: Poll_dto) {
     console.log(poll);
     this.router.navigate(['/vote'], { state: { data: { poll: poll } } });
   }
@@ -55,6 +64,9 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/poll']);
   }
 
+  goToInviteFriend() {
+    this.router.navigate(['/invite']);
+  }
   accept(id: number) {
     console.log(id);
     this._pollService.getFriend(id).subscribe(f => {

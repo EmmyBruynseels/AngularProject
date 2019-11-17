@@ -11,13 +11,27 @@ import { Friend } from '../models/friend.model';
 })
 export class FriendComponent implements OnInit {
 
-  friends: User[];
+  friends: Friend[];
   friendToAccept: Friend;
+  userFriends: User[] = [];
+  
   constructor(private _pollService: PollService, private router: Router) { }
 
   ngOnInit() {
     this._pollService.getFriends().subscribe(friend => {
       this.friends = friend;
+      this.friends.map(f => {
+        if (f.ontvangerID.toString() == localStorage.getItem("userID")) {
+          this.userFriends.push(f.sender);
+        }
+        else {
+          this.userFriends.push(f.ontvanger);
+        }
+      })
     });
+  }
+
+  goToInviteFriend() {
+    this.router.navigate(['/invite']);
   }
 }

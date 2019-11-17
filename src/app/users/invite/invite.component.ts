@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PollService } from 'src/app/polls/poll.service';
-import { User, User2 } from '../models/user.model';
+import { User, User_dto } from '../models/user.model';
 import { send } from 'q';
-import { Friend2, Friend } from '../models/friend.model';
+import { Friend_dto, Friend } from '../models/friend.model';
 
 @Component({
   selector: 'app-invite',
@@ -18,7 +18,7 @@ export class InviteComponent implements OnInit {
   emailBestaat : boolean = false;
   friendIDBestaat : number;
   userToAdd : User;
-  friendToAdd : Friend2;
+  friendToAdd : Friend_dto;
   melding: String;
   friendBestaatAl: boolean = false;
 
@@ -66,7 +66,7 @@ export class InviteComponent implements OnInit {
         }
       });
       if (this.friendBestaatAl == false){
-        this.friendToAdd = new Friend2(+userID,friendID,false);
+        this.friendToAdd = new Friend_dto(+userID,friendID,false);
         this._pollService.addFriend(this.friendToAdd).subscribe(f => {
           console.log(f);
         });
