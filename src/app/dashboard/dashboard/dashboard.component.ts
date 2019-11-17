@@ -28,11 +28,11 @@ export class DashboardComponent implements OnInit {
     this._pollService.getPolls().subscribe(poll => {
       this.poll = poll;
     });
-    this._pollService.getPollsAdmin().subscribe( p => {
+    this._pollService.getPollsAdmin().subscribe(p => {
       console.log(p);
-      this.pollsAdmin = p ;
+      this.pollsAdmin = p;
     });
-    this._pollService.getPollsUitgenodigd().subscribe( p => {
+    this._pollService.getPollsUitgenodigd().subscribe(p => {
       this.pollsUser = p;
     });
     this._pollService.getFriends().subscribe(friend => {
@@ -59,12 +59,19 @@ export class DashboardComponent implements OnInit {
     console.log(id);
     this._pollService.getFriend(id).subscribe(f => {
       this.friendToAccept = f;
-      
+
       this.friendToAccept.accepted = true;
       this._pollService.updateFriend(this.friendToAccept).subscribe(f => {
         console.log("updated!");
         this.router.navigate(['/dashboard']);
       })
+    });
+  }
+  reject(id: number) {
+    console.log(id);
+    this._pollService.deleteFriend(id).subscribe( f => {
+      console.log(f);
+      this.router.navigate(['/dashboard']);
     });
   }
 }

@@ -33,5 +33,12 @@ export class FriendrequestComponent implements OnInit {
     });
   }
 
+  reject(id: number) {
+    console.log(id);
+    this._pollService.deleteFriend(id).subscribe( f => {
+      console.log(f);
+      this.router.navigate(['/dashboard']);
+    });
+  }
 
 }

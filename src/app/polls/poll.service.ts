@@ -95,6 +95,9 @@ export class PollService {
   updateFriend(friend: Friend) {
     return this.http.put<Friend>("https://localhost:5001/api/Friend/" + friend.friendID, friend);
   }
+  deleteFriend(friendID: number) {
+    return this.http.delete<Friend>("https://localhost:5001/api/Friend/" + friendID);
+  }
 
   addFriend(friend: Friend2) {
     return this.http.post<Friend2>("https://localhost:5001/api/Friend", friend);

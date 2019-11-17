@@ -20,7 +20,7 @@ export class VoteComponent implements OnInit {
   gestemd : boolean = false;
   totaalStemmen : number = 0;
 
-  constructor(private _pollService: PollService, private router: Router) { }
+  constructor(private _pollService: PollService, private router: Router) {   }
 
   ngOnInit() {
     //console.log(history.state.data.poll);
