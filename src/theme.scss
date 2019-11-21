@@ -13,8 +13,8 @@ $helloworld-app-theme: mat-light-theme($helloworld-app-primary, $helloworld-app-
 @include angular-material-theme($helloworld-app-theme); //theme object is included in the Angular Material Theme and will now be used throughout the application
 */
 
-$light-primary: mat-palette($mat-indigo);
-$light-accent:  mat-palette($mat-pink, A200, A100, A400);
+$light-primary: mat-palette($mat-pink, A200);
+$light-accent:  mat-palette($mat-purple, 300);
 $light-theme:   mat-light-theme($light-primary, $light-accent);
 body {
   @include angular-material-theme($light-theme);
@@ -22,9 +22,9 @@ body {
 
 
 
-$dark-primary: mat-palette($mat-blue-grey, 500);
-$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent);
+// $dark-primary: mat-palette($mat-blue-grey, 500);
+// $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+// $dark-theme:   mat-dark-theme($dark-primary, $dark-accent);
 
 
-  @include angular-material-theme($dark-theme);
+//   @include angular-material-theme($dark-theme);

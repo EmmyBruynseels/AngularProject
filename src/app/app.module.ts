@@ -27,8 +27,10 @@ import { SharedModule } from './shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AuthGuard } from './security/guards/auth.guard';
 import { FriendComponent } from './users/friend/friend.component';
-import { FriendrequestComponent } from './users/friendrequest/friendrequest.component';
 import { InviteComponent } from './users/invite/invite.component';
+import { HomeComponent } from './home/home/home.component';
+import { EditPollsComponent } from './edit-polls/edit-polls/edit-polls.component';
+import { EditPollsModule } from './edit-polls/edit-polls.module';
 
 const appRoutes: Routes = [
   {
@@ -51,17 +53,22 @@ const appRoutes: Routes = [
     path: 'vote',
     component: VoteComponent, canActivate: [AuthGuard]
   },
+  {
+    path: 'edit',
+    component: EditPollsComponent, canActivate: [AuthGuard]
+  },
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'friend', component: FriendComponent, canActivate: [AuthGuard] },
-  { path: 'request', component: FriendrequestComponent, canActivate: [AuthGuard] },
-  { path: 'invite', component: InviteComponent, canActivate: [AuthGuard] }
+  { path: 'invite', component: InviteComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,8 @@ const appRoutes: Routes = [
     AddPollModule,
     VoteModule,
     UserModule,
-    SharedModule
+    SharedModule,
+    EditPollsModule
   ],
   providers: [
     {

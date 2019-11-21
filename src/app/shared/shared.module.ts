@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -12,6 +12,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatBadgeModule} from '@angular/material/badge';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [],
@@ -30,7 +31,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatExpansionModule,
     MatSelectModule,
     MatProgressBarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   exports: [
     MatButtonModule,
@@ -46,7 +49,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatExpansionModule,
     MatSelectModule,
     MatProgressBarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ReactiveFormsModule,
+    FlexLayoutModule
   ]
 })
 export class SharedModule { }

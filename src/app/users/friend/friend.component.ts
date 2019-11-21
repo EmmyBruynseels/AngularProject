@@ -13,11 +13,12 @@ export class FriendComponent implements OnInit {
 
   friends: Friend[];
   friendToAccept: Friend;
-  userFriends: User[] = [];
-  
+  userFriends: User[];
+
   constructor(private _pollService: PollService, private router: Router) { }
 
   ngOnInit() {
+    this.userFriends= [];
     this._pollService.getFriends().subscribe(friend => {
       this.friends = friend;
       this.friends.map(f => {
@@ -33,5 +34,19 @@ export class FriendComponent implements OnInit {
 
   goToInviteFriend() {
     this.router.navigate(['/invite']);
+  }
+
+  delete(fr: User) {
+    let userID = +localStorage.getItem("userID");
+
+    this._pollService.getFriends().subscribe(friend => {
+      this.friends = friend;
+      this.friends.map(f => {
+        if ((f.ontvangerID == userID && f.senderID == fr.userID) || (f.senderID == userID && f.ontvangerID == fr.userID)) {
+          this._pollService.deleteFriend(f.friendID).subscribe();
+        }
+      });
+    });
+    this.ngOnInit();
   }
 }

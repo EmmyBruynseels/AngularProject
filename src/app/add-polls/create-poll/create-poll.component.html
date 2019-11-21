@@ -29,14 +29,13 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Vrienden uitnodigen</ng-template>
-    <mat-form-field>
-        <mat-label>Select friend</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let f of userFriends" [value]="f.userID" (click)="addFriendToPoll(f.userID)">
-            {{f.username}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <mat-label>Select friend</mat-label>
+    <mat-list>
+      <mat-list-item *ngFor="let f of userFriends">
+        {{f.username}}
+        <button mat-button color="accent" (click)="addFriendToPoll(f.userID)">Add friend</button>
+      </mat-list-item>
+    </mat-list>
     <div>
       <button mat-button color="accent" matStepperNext>Next</button>
     </div>

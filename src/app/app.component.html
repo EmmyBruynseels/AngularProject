@@ -6,28 +6,28 @@
           [routerLinkActiveOptions]="{ exact: true }">Security/login</a>
         <a mat-list-item routerLink="/signup" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">signup</a>
+          <a mat-list-item routerLink="/home" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Home</a>
         <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">dashboard</a>
+          [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
 
         <mat-divider></mat-divider>
         <a mat-list-item class="menu">
-          <mat-icon svgIcon="poll" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+          <mat-icon svgIcon="poll" aria-hidden="false" aria-label="polls"></mat-icon>
           <p>Polls</p>
         </a>
         <a mat-list-item routerLink="/addpoll" routerLinkActive="active" class="submenu"
           [routerLinkActiveOptions]="{ exact: true }">Nieuwe Poll</a>
-        <a mat-list-item routerLink="/poll" routerLinkActive="active" class="submenu"
-          [routerLinkActiveOptions]="{ exact: true }">Polls</a>
+        <!-- <a mat-list-item routerLink="/poll" routerLinkActive="active" class="submenu"
+          [routerLinkActiveOptions]="{ exact: true }">Polls</a> -->
 
         <mat-divider></mat-divider>
         <a mat-list-item class="menu">
-          <mat-icon svgIcon="friends" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+          <mat-icon svgIcon="friends" aria-hidden="false" aria-label="friends"></mat-icon>
           <p>Friends</p>
         </a>
         <a mat-list-item routerLink="/friend" routerLinkActive="active" class="submenu"
         [routerLinkActiveOptions]="{ exact: true }">Friends</a>
-        <a mat-list-item routerLink="/request" routerLinkActive="active" class="submenu"
-        [routerLinkActiveOptions]="{ exact: true }">Requests</a>
 
         <a mat-list-item routerLink="/invite" routerLinkActive="active" class="submenu"
           [routerLinkActiveOptions]="{ exact: true }">Uitnodigen</a>

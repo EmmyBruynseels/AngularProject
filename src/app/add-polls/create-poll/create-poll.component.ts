@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Poll } from 'src/app/polls/models/poll.model';
+import { Poll, Poll_dto } from 'src/app/polls/models/poll.model';
 import { PollService } from 'src/app/polls/poll.service';
 import { Antwoord_dto, Antwoord_dto2 } from 'src/app/polls/models/antwoord.model';
 import { Router } from '@angular/router';
@@ -29,7 +29,8 @@ export class CreatePollComponent implements OnInit {
   userID: number;
   friends: Friend[];
   userFriends: User[] = [];
-
+  
+  pollBeingCreated: Poll_dto;
   constructor(private _formBuilder: FormBuilder, private _pollService: PollService, private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 
     iconRegistry.addSvgIcon(
@@ -62,6 +63,7 @@ export class CreatePollComponent implements OnInit {
 
   createPoll() {
     const { naam } = this.addPollFormGroup.value;
+    console.log(this.addPollFormGroup.value);
     if (naam != "") {
       let antwoorden = [];
       this.pollToAdd = new Poll(0, naam, antwoorden);
@@ -69,6 +71,8 @@ export class CreatePollComponent implements OnInit {
         poll => {
           this.addedPoll = poll;
           this.userID = +localStorage.getItem("userID");
+
+          //this.pollBeingCreated.naam = naam;
 
           this.pgToAdd = new PollGebruiker_dto(this.addedPoll.pollID, this.userID, true);
           console.log(this.pgToAdd);

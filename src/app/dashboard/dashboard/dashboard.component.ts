@@ -58,6 +58,11 @@ export class DashboardComponent implements OnInit {
     console.log(poll);
     this.router.navigate(['/vote']);
   }
+  edit(poll: Poll_dto) {
+    this._pollService.setPollDashboard(poll);
+    // this._pollService.setPollEdit(poll.pollID);
+    this.router.navigate(['/edit']);
+  }
 
   goToAddPoll() {
     this.router.navigate(['/addpoll']);

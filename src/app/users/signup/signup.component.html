@@ -27,13 +27,13 @@
             <input matInput type="password" placeholder="Repeat password" formControlName="repeatPassword" />
           </mat-form-field>
         </p>
-        <p><button mat-raised-button color="accent" type="submit" [disabled]="!createUserform.valid">Submit</button>
+        <p><button mat-raised-button color="primary" type="submit" [disabled]="!createUserform.valid">Submit</button>
           <p *ngIf="melding">{{melding}}</p>
           <p *ngIf="meldingPassword">{{meldingPassword}}</p>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" class="btn btn-success" (click)="goToLogin()">Back to log in</button>
+      <button mat-raised-button color="accent" class="btn btn-success" (click)="goToLogin()">Back to log in</button>
     </mat-card-actions>
   </mat-card>
 </div>

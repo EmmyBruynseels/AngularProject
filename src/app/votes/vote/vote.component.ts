@@ -22,12 +22,12 @@ export class VoteComponent implements OnInit {
   totaalStemmen : number = 0;
   users: User[] = [];
 
-  constructor(private _pollService: PollService, private router: Router) {   }
+  constructor(private _pollService: PollService, private router: Router) {  }
 
   ngOnInit() {
     //console.log(history.state.data.poll);
     this.poll = this._pollService.getPollDashboard();
-    console.log(this.poll);
+    
     this.poll.antwoorden.map(a => {
       a.stemmen.map(s => {
         this.totaalStemmen++;
@@ -66,5 +66,14 @@ export class VoteComponent implements OnInit {
         }
       });
     });
+  }
+
+  deletePoll(pollID: number) {
+
+    console.log(pollID);
+    // this._pollService.deletePoll(pollID).subscribe(p => {
+    //   console.log(p);
+    //   this.ngOnInit();
+    // });
   }
 }

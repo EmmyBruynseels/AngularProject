@@ -4,6 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { User } from './users/models/user.model';
 import { PollService } from './polls/poll.service';
 import { AuthenticateService } from './security/services/authenticate.service';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',

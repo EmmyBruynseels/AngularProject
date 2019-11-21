@@ -5,21 +5,6 @@
 
     </mat-card-header>
     <mat-card-content>
-      <!--<form (ngSubmit)="onSubmit()">
-        <p>
-          <mat-form-field>
-            <input matInput placeholder="Username" required [(ngModel)]="userLogin.username" name="username">
-          </mat-form-field>
-
-        </p>
-        <p>
-          <mat-form-field>
-            <input matInput placeholder="Password" type="password" required [(ngModel)]="userLogin.password" name="password">
-          </mat-form-field>
-        </p>
-        <button mat-raised-button color="accent" type="submit" class="btn btn-success">Submit</button>
-
-      </form>-->
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <p>Username :
           <mat-form-field>
@@ -36,7 +21,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" class="btn btn-success" (click)="goToSignup()">Signup</button>
+      <button mat-raised-button color="accent" class="btn btn-success" (click)="goToSignup()">Signup</button>
     </mat-card-actions>
   </mat-card>
 </div>

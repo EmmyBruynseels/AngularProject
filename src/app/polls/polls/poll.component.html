@@ -46,23 +46,7 @@
             <mat-divider></mat-divider>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button color="accent" (click)="vote(p.pollID)">Vote</button>
-            <!--<mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Click here to vote!
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <mat-list>
-
-                <mat-list-item *ngFor="let a of p.antwoorden">{{a.naam}}
-                  <button mat-raised-button color="primary" (click)="stem(a.antwoordID)">Stem</button>
-                </mat-list-item>
-              </mat-list>
-
-
-            </mat-expansion-panel>-->
+            <button mat-raised-button color="accent" (click)="vote(p)">Vote</button>
           </mat-card-actions>
         </mat-card>
 
