@@ -25,11 +25,9 @@ export class CreatePollComponent implements OnInit {
   addedPoll: Poll;
   antwoordToAdd: Antwoord_dto2;
   pgToAdd: PollGebruiker_dto;
-
-  userID: number;
   friends: Friend[];
   userFriends: User[] = [];
-  
+
   pollBeingCreated: Poll_dto;
   constructor(private _formBuilder: FormBuilder, private _pollService: PollService, private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 
@@ -48,9 +46,8 @@ export class CreatePollComponent implements OnInit {
     this.addAntwoordFormGroup = this._formBuilder.group({
       antwoord: ['', Validators.required]
     });
-    this._pollService.getFriendAndRequest().subscribe(f => {
-      this.friends = f;
-      this.friends.map(f => {
+    this._pollService.getFriendAndRequest().subscribe(friends => {
+      friends.map(f => {
         if (f.ontvangerID.toString() == localStorage.getItem("userID")) {
           this.userFriends.push(f.sender);
         }
@@ -63,23 +60,15 @@ export class CreatePollComponent implements OnInit {
 
   createPoll() {
     const { naam } = this.addPollFormGroup.value;
-    console.log(this.addPollFormGroup.value);
     if (naam != "") {
       let antwoorden = [];
       this.pollToAdd = new Poll(0, naam, antwoorden);
       this._pollService.addPoll(this.pollToAdd).subscribe(
         poll => {
           this.addedPoll = poll;
-          this.userID = +localStorage.getItem("userID");
 
-          //this.pollBeingCreated.naam = naam;
-
-          this.pgToAdd = new PollGebruiker_dto(this.addedPoll.pollID, this.userID, true);
-          console.log(this.pgToAdd);
-          this._pollService.addPollGebruiker(this.pgToAdd).subscribe(
-            pg => {
-              console.log(pg);
-            });
+          this.pgToAdd = new PollGebruiker_dto(poll.pollID, +localStorage.getItem("userID"), true);
+          this._pollService.addPollGebruiker(this.pgToAdd).subscribe();
         });
     }
   }
@@ -88,9 +77,7 @@ export class CreatePollComponent implements OnInit {
     const { antwoord } = this.addAntwoordFormGroup.value;
     if (antwoord != "") {
       this.antwoordToAdd = new Antwoord_dto2(antwoord, this.addedPoll.pollID);
-      this._pollService.addAntwoord(this.antwoordToAdd).subscribe(
-        antwoord => console.log(antwoord)
-      );
+      this._pollService.addAntwoord(this.antwoordToAdd).subscribe();
 
       //form leegmaken
       this.addAntwoordFormGroup.patchValue({
@@ -103,10 +90,7 @@ export class CreatePollComponent implements OnInit {
     const { antwoord } = this.addAntwoordFormGroup.value;
     if (antwoord != "") {
       this.antwoordToAdd = new Antwoord_dto2(antwoord, this.addedPoll.pollID);
-      this._pollService.addAntwoord(this.antwoordToAdd).subscribe(
-        antwoord => {
-          console.log(antwoord);
-        });
+      this._pollService.addAntwoord(this.antwoordToAdd).subscribe();
     }
   }
 

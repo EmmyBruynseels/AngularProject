@@ -38,8 +38,7 @@ export class PollComponent implements OnInit {
   }
 
   vote(poll: Poll_dto) {
-    this._pollService.setPollDashboard(poll);
-    console.log(poll);
+    // this._pollService.setPollDashboard(poll);
     this.router.navigate(['/vote']);
   }
 

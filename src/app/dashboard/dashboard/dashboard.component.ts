@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requests= new Array<Friend>();
+    this.requests = new Array<Friend>();
     this._pollService.getPolls().subscribe(poll => {
       this.poll = poll;
     });
@@ -54,13 +54,11 @@ export class DashboardComponent implements OnInit {
   }
 
   vote(poll: Poll_dto) {
-    this._pollService.setPollDashboard(poll);
-    console.log(poll);
+    this._pollService.setPoll(poll.pollID);
     this.router.navigate(['/vote']);
   }
   edit(poll: Poll_dto) {
-    this._pollService.setPollDashboard(poll);
-    // this._pollService.setPollEdit(poll.pollID);
+    this._pollService.setPoll(poll.pollID);
     this.router.navigate(['/edit']);
   }
 
@@ -75,6 +73,7 @@ export class DashboardComponent implements OnInit {
   goToInviteFriend() {
     this.router.navigate(['/invite']);
   }
+
   accept(id: number) {
     console.log(id);
     this._pollService.getFriend(id).subscribe(f => {
@@ -82,15 +81,12 @@ export class DashboardComponent implements OnInit {
 
       this.friendToAccept.accepted = true;
       this._pollService.updateFriend(this.friendToAccept).subscribe(f => {
-        console.log("updated!");
         this.ngOnInit();
       })
     });
   }
   reject(id: number) {
-    console.log(id);
-    this._pollService.deleteFriend(id).subscribe( f => {
-      console.log(f);
+    this._pollService.deleteFriend(id).subscribe(f => {
       this.ngOnInit();
     });
   }

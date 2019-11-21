@@ -16,64 +16,50 @@ export class VoteComponent implements OnInit {
 
   stemToAdd: Stem_dto;
   poll: Poll_dto;
-  alleAntwoorden : Antwoord[];
+  alleAntwoorden: Antwoord[];
   antwoordenBijPoll: Antwoord[];
-  gestemd : boolean = false;
-  totaalStemmen : number = 0;
+  gestemd: boolean = false;
+  totaalStemmen: number = 0;
   users: User[] = [];
 
-  constructor(private _pollService: PollService, private router: Router) {  }
+  constructor(private _pollService: PollService, private router: Router) { }
 
   ngOnInit() {
-    //console.log(history.state.data.poll);
-    this.poll = this._pollService.getPollDashboard();
-    
-    this.poll.antwoorden.map(a => {
-      a.stemmen.map(s => {
-        this.totaalStemmen++;
-        if (s.userID == +localStorage.getItem("userID")) {
-          this.gestemd = true;
-        }
+    this._pollService.getPoll().subscribe(result => {
+      this.poll = result;
+      
+      this.poll.antwoorden.map(a => {
+        a.stemmen.map(s => {
+          this.totaalStemmen++;
+          if (s.userID == +localStorage.getItem("userID")) {
+            this.gestemd = true;
+          }
+        });
       });
-    });
-    this.poll.users.map( u => {
-      this._pollService.getUser(u.userID).subscribe( user => {
-        this.users.push(user);
+      this.poll.users.map(u => {
+        this._pollService.getUser(u.userID).subscribe(user => {
+          this.users.push(user);
+        });
       });
     });
   }
 
   stem(antwoordID: number) {
-    var userID = localStorage.getItem("userID");
-    this.stemToAdd = new Stem_dto(0, antwoordID, +userID);
-    console.log(antwoordID);
-    console.log(this.stemToAdd);
+    this.stemToAdd = new Stem_dto(0, antwoordID, +localStorage.getItem("userID"));
     this._pollService.addStem(this.stemToAdd).subscribe(
-      stem =>{ 
-        console.log(stem);
-        this.router.navigate(['/poll']);
+      stem => {
+        this.ngOnInit();
       });
   }
 
-  stemAnnuleren(){
-    console.log(this.poll);
+  stemAnnuleren() {
     this.poll.antwoorden.map(a => {
       a.stemmen.map(s => {
         if (s.userID == +localStorage.getItem("userID")) {
-          let stemID = s.stemID;
-          this._pollService.deleteStem(stemID).subscribe();
+          this._pollService.deleteStem(s.stemID).subscribe();
           this.gestemd = false;
         }
       });
     });
-  }
-
-  deletePoll(pollID: number) {
-
-    console.log(pollID);
-    // this._pollService.deletePoll(pollID).subscribe(p => {
-    //   console.log(p);
-    //   this.ngOnInit();
-    // });
   }
 }

@@ -58,9 +58,8 @@ export class InviteComponent implements OnInit {
   sendFriendRequest(friendID) {
     let userID = localStorage.getItem("userID");
 
-    this._pollService.getAllFriends().subscribe(f => {
-      let friends: Friend[] = f;
-      friends.map( friend => {
+    this._pollService.getAllFriends().subscribe(friends => {
+      friends.map(friend => {
         if((friend.ontvangerID == friendID || friend.senderID == friendID) && (friend.senderID == +userID || friend.ontvangerID == +userID) ) {
           this.friendBestaatAl = true;
         }

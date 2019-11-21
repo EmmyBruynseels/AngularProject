@@ -19,18 +19,10 @@ export class PollService {
 
   constructor(private http: HttpClient) { }
 
-  getPollDashboard() {
-    return this.poll;
-  }
-  
-  setPollDashboard(poll: Poll_dto) {
-    this.poll = poll;
-  }
-
-  getPollEdit() {
-    return this.pollID;
-  }
-  setPollEdit(pollID: number){
+  // getPollEdit() {
+  //   return this.pollID;
+  // }
+  setPoll(pollID: number){
     this.pollID = pollID;
   }
 
@@ -50,8 +42,8 @@ export class PollService {
     var userID = localStorage.getItem("userID");
     return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll/pollsUser?userID=" + +userID);
   }
-  getPoll(pollID: number) {
-    return this.http.get<Poll_dto>("https://localhost:5001/api/Poll/" + pollID);
+  getPoll() {
+    return this.http.get<Poll_dto>("https://localhost:5001/api/Poll/" + this.pollID);
   }
   deletePoll(pollID : number) {
     return this.http.delete<Poll>("https://localhost:5001/api/Poll/" + pollID);

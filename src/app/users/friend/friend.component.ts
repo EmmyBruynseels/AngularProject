@@ -11,7 +11,6 @@ import { Friend } from '../models/friend.model';
 })
 export class FriendComponent implements OnInit {
 
-  friends: Friend[];
   friendToAccept: Friend;
   userFriends: User[];
 
@@ -19,9 +18,8 @@ export class FriendComponent implements OnInit {
 
   ngOnInit() {
     this.userFriends= [];
-    this._pollService.getFriends().subscribe(friend => {
-      this.friends = friend;
-      this.friends.map(f => {
+    this._pollService.getFriends().subscribe(friends => {
+      friends.map(f => {
         if (f.ontvangerID.toString() == localStorage.getItem("userID")) {
           this.userFriends.push(f.sender);
         }
@@ -39,9 +37,8 @@ export class FriendComponent implements OnInit {
   delete(fr: User) {
     let userID = +localStorage.getItem("userID");
 
-    this._pollService.getFriends().subscribe(friend => {
-      this.friends = friend;
-      this.friends.map(f => {
+    this._pollService.getFriends().subscribe(friends => {
+      friends.map(f => {
         if ((f.ontvangerID == userID && f.senderID == fr.userID) || (f.senderID == userID && f.ontvangerID == fr.userID)) {
           this._pollService.deleteFriend(f.friendID).subscribe();
         }

@@ -35,7 +35,7 @@ import { EditPollsModule } from './edit-polls/edit-polls.module';
 const appRoutes: Routes = [
   {
     path: '',
-    component: SecurityComponent
+    component: HomeComponent
   },
   {
     path: 'security',

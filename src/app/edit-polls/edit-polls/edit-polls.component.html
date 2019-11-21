@@ -1,4 +1,4 @@
-<mat-card class="vote-card">
+<mat-card class="vote-card" *ngIf="poll">
   <mat-card-header>
     <mat-card-title>{{poll.naam}} 
         <button mat-button color="primary" (click)="deletePoll()">Delete poll</button>
