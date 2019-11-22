@@ -7,30 +7,29 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import { PollComponent } from './polls/polls/poll.component';
-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SecurityInterceptor } from './security/security.interceptor';
-import { SecurityModule } from './security/security/security.module';
-import { SecurityComponent } from './security/security/security/security.component';
 import { MatSidenavModule, MatListModule } from '@angular/material';
-
-import { PollsModule } from './polls/polls.module';
-import { AddPollModule } from './add-polls/add-poll.module';
-import { VoteComponent } from './votes/vote/vote.component';
-import { VoteModule } from './votes/vote/vote.module';
-import { SignupComponent } from './users/signup/signup.component';
-import { UserModule } from './users/user.module';
-import { CreatePollComponent } from './add-polls/create-poll/create-poll.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { SharedModule } from './shared/shared.module';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
-import { AuthGuard } from './security/guards/auth.guard';
-import { FriendComponent } from './users/friend/friend.component';
-import { InviteComponent } from './users/invite/invite.component';
-import { HomeComponent } from './home/home/home.component';
-import { EditPollsComponent } from './edit-polls/edit-polls/edit-polls.component';
-import { EditPollsModule } from './edit-polls/edit-polls.module';
+
+import { PollsModule } from './components/polls/polls.module';
+import { HomeComponent } from './components/home/home/home.component';
+import { SecurityComponent } from './components/security/security/security/security.component';
+import { CreatePollComponent } from './components/polls/create-poll/create-poll.component';
+import { AuthGuard } from './components/security/guards/auth.guard';
+import { VoteComponent } from './components/polls/vote/vote.component';
+import { EditPollsComponent } from './components/polls/edit-polls/edit-polls.component';
+import { SignupComponent } from './components/users/signup/signup.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { FriendComponent } from './components/users/friend/friend.component';
+import { InviteComponent } from './components/users/invite/invite.component';
+import { SecurityModule } from './components/security/security/security.module';
+import { UserModule } from './components/users/user.module';
+import { SharedModule } from './components/shared/shared.module';
+import { SecurityInterceptor } from './components/security/security.interceptor';
+
+
+
+
 
 const appRoutes: Routes = [
   {
@@ -42,10 +41,6 @@ const appRoutes: Routes = [
     component: SecurityComponent
   },
   {
-    path: 'poll',
-    component: PollComponent, canActivate: [AuthGuard]
-  },
-  {
     path: 'addpoll',
     component: CreatePollComponent, canActivate: [AuthGuard]
   },
@@ -53,7 +48,7 @@ const appRoutes: Routes = [
     path: 'vote',
     component: VoteComponent, canActivate: [AuthGuard]
   },
-  {
+  { 
     path: 'edit',
     component: EditPollsComponent, canActivate: [AuthGuard]
   },
@@ -73,18 +68,17 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SecurityModule,
+    
     MatSidenavModule,
     MatListModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     BrowserAnimationsModule,
     HttpClientModule,
+    SecurityModule,
     PollsModule,
-    AddPollModule,
-    VoteModule,
     UserModule,
     SharedModule,
-    EditPollsModule
+
   ],
   providers: [
     {

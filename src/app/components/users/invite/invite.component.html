@@ -1,0 +1,8 @@
+<mat-card>
+  <form [formGroup]="inviteFriendFG">
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" required>
+    </mat-form-field>
+    <button mat-button color="accent" (click)="inviteFriend()">Invite</button>
+  </form>
+</mat-card>

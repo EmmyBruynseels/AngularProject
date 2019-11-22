@@ -1,0 +1,57 @@
+<mat-card class="vote-card" *ngIf="poll">
+  <mat-card-header>
+    <mat-card-title>{{poll.naam}} 
+        <button mat-button color="primary" (click)="deletePoll()">Delete poll</button>
+      <!-- <button mat-raised-button color="primary" (click)="delete(poll.pollID)">Delete poll</button> -->
+    </mat-card-title>
+  </mat-card-header>
+
+  <!-- antwoorden kaart -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Antwoorden</mat-card-title>
+    </mat-card-header>
+    <div *ngFor="let a of poll.antwoorden" fxLayout="column" fxLayoutAlign="center left" fxLayoutGap="20px">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between">
+        <p>{{a.naam}} ({{a.stemmen.length}})</p>
+
+        <button mat-button color="primary" (click)="deleteAntwoord(a.antwoordID)">Delete</button>
+      </div>
+      <div>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+    <form [formGroup]="addAntwoordFormGroup">
+      <mat-form-field>
+        <input matInput placeholder="antwoord" formControlName="antwoord" required>
+      </mat-form-field>
+      <div>
+        <button mat-button color="accent" (click)="addAntwoord()" [disabled]="!addAntwoordFormGroup.valid">Add
+          antwoord</button>
+      </div>
+    </form>
+  </mat-card>
+
+  <!-- users kaart -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Users</mat-card-title>
+    </mat-card-header>
+    <mat-list>
+      <mat-list-item *ngFor="let u of users">{{u.username}}
+        <button mat-button color="primary" (click)="deleteUser(u.userID)">Delete</button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+
+
+    <mat-label>Select friend</mat-label>
+    <mat-list>
+      <mat-list-item *ngFor="let f of userFriends">
+        {{f.username}}
+        <button mat-button color="accent" (click)="addFriendToPoll(f.userID)">Add friend</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+
+</mat-card>

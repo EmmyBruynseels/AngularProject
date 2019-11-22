@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { User } from './users/models/user.model';
-import { PollService } from './polls/poll.service';
-import { AuthenticateService } from './security/services/authenticate.service';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { User } from './models/user.model';
+import { PollService } from './services/poll.service';
+import { AuthenticateService } from './components/security/services/authenticate.service';
 
 @Component({
   selector: 'app-root',
