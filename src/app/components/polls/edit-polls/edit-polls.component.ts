@@ -31,7 +31,6 @@ export class EditPollsComponent implements OnInit {
   ngOnInit() {
     this.userID = +localStorage.getItem("userID");
 
-    // let pollID = this._pollService.getPollEdit();
     this._pollService.getPoll().subscribe(result => {
       this.poll = result;
 
@@ -70,6 +69,7 @@ export class EditPollsComponent implements OnInit {
   }
 
   addAntwoord() {
+    //antwoord toevoegen aan poll
     const { antwoord } = this.addAntwoordFormGroup.value;
     if (antwoord != "") {
       this.antwoordToAdd = new Antwoord_dto2(antwoord, this.poll.pollID);
@@ -81,6 +81,8 @@ export class EditPollsComponent implements OnInit {
   }
 
   deleteAntwoord(antwoordID: number) {
+    //antwoord uit poll verwijderen
+    //minstens 2 antwoorden laten staan
     if (this.poll.antwoorden.length > 2) {
       this._pollService.deleteAntwoord(antwoordID).subscribe(result => {
         this.ngOnInit();
@@ -95,6 +97,7 @@ export class EditPollsComponent implements OnInit {
 
 
   addFriendToPoll(friendID) {
+    //user toevoegen aan poll
     let altoegevoegd = false;
     this.poll.users.map(u => {
       u.userID == friendID ? altoegevoegd = true : this._snackBar.open("Deze user is al toegevoegd aan de poll" + this.poll.naam, "OK", {
@@ -110,6 +113,7 @@ export class EditPollsComponent implements OnInit {
 
   }
   deleteUser(id: number) {
+    //user verwijderen uit poll
     this._pollService.getPollGebruikers().subscribe(pollUsers => {
       pollUsers.map(pg => {
 
@@ -124,6 +128,7 @@ export class EditPollsComponent implements OnInit {
 
   }
   deletePoll() {
+    //poll verwijderen
     this._pollService.deletePoll(this.poll.pollID).subscribe(result => {
       this.router.navigate(['/dashboard']);
     });

@@ -36,6 +36,7 @@ export class FriendComponent implements OnInit {
   }
 
   delete(fr: User) {
+    //delete friend-object
     let userID = +localStorage.getItem("userID");
 
     this._pollService.getFriends().subscribe(friends => {

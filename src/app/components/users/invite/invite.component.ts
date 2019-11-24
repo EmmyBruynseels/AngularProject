@@ -15,13 +15,13 @@ export class InviteComponent implements OnInit {
 
   inviteFriendFG: FormGroup;
   users: User[];
-  emailBestaat : boolean = false;
-  friendIDBestaat : number;
-  userToAdd : User;
-  friendToAdd : Friend_dto;
+  emailBestaat: boolean = false;
+  friendIDBestaat: number;
+  userToAdd: User;
+  friendToAdd: Friend_dto;
   friendBestaatAl: boolean = false;
 
-  constructor(private _formBuilder: FormBuilder, private _pollService: PollService, private router: Router,private _snackBar: MatSnackBar) { }
+  constructor(private _formBuilder: FormBuilder, private _pollService: PollService, private router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.inviteFriendFG = this._formBuilder.group({
@@ -33,15 +33,17 @@ export class InviteComponent implements OnInit {
     this._pollService.getUsers().subscribe(u => {
       this.users = u;
       this.users.map(user => {
-        if (user.email == email){
+        if (user.email == email) {
           this.emailBestaat = true;
           this.friendIDBestaat = user.userID;
         }
       });
-
       if (this.emailBestaat == false) {
-        this.userToAdd = new User(0,null, email,null,null);
-        this._pollService.addUser(this.userToAdd).subscribe( u => {
+        //email bestaat nog niet
+        //user-object met deze email aanmaken
+        //Friendrequest sturen
+        this.userToAdd = new User(0, null, email, null, null);
+        this._pollService.addUser(this.userToAdd).subscribe(u => {
           this.sendFriendRequest(u.userID);
           this._snackBar.open("Friend toegevoegd & Friendrequest verstuurd", "OK", {
             duration: 3000,
@@ -49,6 +51,8 @@ export class InviteComponent implements OnInit {
         });
       }
       else {
+        //email bestaat al
+        //friendrequest sturen naar user met deze email
         this.sendFriendRequest(this.friendIDBestaat);
         this._snackBar.open("Friendrequest verstuurd", "OK", {
           duration: 3000,
@@ -62,22 +66,22 @@ export class InviteComponent implements OnInit {
 
     this._pollService.getAllFriends().subscribe(friends => {
       friends.map(friend => {
-        if((friend.ontvangerID == friendID || friend.senderID == friendID) && (friend.senderID == +userID || friend.ontvangerID == +userID) ) {
+        if ((friend.ontvangerID == friendID || friend.senderID == friendID) && (friend.senderID == +userID || friend.ontvangerID == +userID)) {
           this.friendBestaatAl = true;
         }
       });
-      if (this.friendBestaatAl == false){
-        this.friendToAdd = new Friend_dto(+userID,friendID,false);
+      if (this.friendBestaatAl == false) {
+        this.friendToAdd = new Friend_dto(+userID, friendID, false);
         this._pollService.addFriend(this.friendToAdd).subscribe(f => {
           console.log(f);
         });
       }
-      else{
+      else {
         this._snackBar.open("Friend bestaat al", "OK", {
           duration: 3000,
         });
-        
+
       }
-     });
+    });
   }
 }

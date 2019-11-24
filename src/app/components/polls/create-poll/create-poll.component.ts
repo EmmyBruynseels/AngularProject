@@ -60,6 +60,7 @@ export class CreatePollComponent implements OnInit {
   }
 
   createPoll() {
+    //poll-object aanmaken & current user aan toevoegen
     const { naam } = this.addPollFormGroup.value;
     if (naam != "") {
       let antwoorden = [];
@@ -68,6 +69,7 @@ export class CreatePollComponent implements OnInit {
         poll => {
           this.addedPoll = poll;
 
+          //current user aan poll toevoegen
           this.pgToAdd = new PollGebruiker_dto(poll.pollID, +localStorage.getItem("userID"), true);
           this._pollService.addPollGebruiker(this.pgToAdd).subscribe();
 
@@ -79,6 +81,8 @@ export class CreatePollComponent implements OnInit {
   }
 
   createAntwoord() {
+    //antwoord toevoegen aan poll
+    //form leegmaken om nog een antwoord toe te voegen
     const { antwoord } = this.addAntwoordFormGroup.value;
     if (antwoord != "") {
       this.antwoordToAdd = new Antwoord_dto2(antwoord, this.addedPoll.pollID);
@@ -96,6 +100,8 @@ export class CreatePollComponent implements OnInit {
   }
 
   addAntwoord() {
+    //antwoord toevoegen aan poll
+    //hierna naar volgende stap van poll aanmaken
     const { antwoord } = this.addAntwoordFormGroup.value;
     if (antwoord != "") {
       this.antwoordToAdd = new Antwoord_dto2(antwoord, this.addedPoll.pollID);
@@ -112,6 +118,7 @@ export class CreatePollComponent implements OnInit {
   }
 
   addFriendToPoll(friendID: number, username: string) {
+    //user toevoegen aan poll (pollgebruikers)
     this.pgToAdd = new PollGebruiker_dto(this.addedPoll.pollID, friendID, false);
     this._pollService.addPollGebruiker(this.pgToAdd).subscribe(pg => {
       this._snackBar.open(username + " werd toegevoegd aan poll " + this.addedPoll.naam, "OK", {

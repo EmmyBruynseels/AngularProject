@@ -15,6 +15,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+//een module met alle imports ivm material / forms / ...
 @NgModule({
   declarations: [],
   imports: [

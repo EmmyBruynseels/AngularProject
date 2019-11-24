@@ -11,25 +11,26 @@ import { UserLogin } from 'src/app/models/user-login.model';
 })
 export class SecurityComponent implements OnInit {
   submitted: boolean = false;
-  userLogin: UserLogin = new UserLogin("","");
+  userLogin: UserLogin = new UserLogin("", "");
 
   loginForm = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
   });
-  
-  constructor(private _authenticateService: AuthenticateService,private router: Router, private fb: FormBuilder) { }
+
+  constructor(private _authenticateService: AuthenticateService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
+    //aanmelden met authenticationService
+    //token & userID in localstorage toevoegen
     this.submitted = true;
-    const { username,password } = this.loginForm.value;
+    const { username, password } = this.loginForm.value;
     this.userLogin.password = password;
     this.userLogin.username = username;
 
-    console.log(this.userLogin);
     this._authenticateService.authenticate(this.userLogin).subscribe(result => {
       localStorage.setItem("token", result.token);
       localStorage.setItem("userID", result.userID.toString());
@@ -37,7 +38,7 @@ export class SecurityComponent implements OnInit {
     });
     this.router.navigate(['/dashboard']);
   }
-  
+
   goToSignup() {
     this.router.navigate(['/signup']);
   }

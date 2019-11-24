@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
   }
 
   accept(id: number) {
-    console.log(id);
+    //Friend-object ophalen, accepted naar true zetten en opslaan
     this._pollService.getFriend(id).subscribe(f => {
       this.friendToAccept = f;
 
@@ -87,6 +87,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   reject(id: number) {
+    //friend-object verwijderen
     this._pollService.deleteFriend(id).subscribe(f => {
       this.ngOnInit();
     });

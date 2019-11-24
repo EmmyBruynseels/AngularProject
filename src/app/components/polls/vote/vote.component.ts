@@ -45,6 +45,7 @@ export class VoteComponent implements OnInit {
   }
 
   stem(antwoordID: number) {
+    //stel toevoegen aan antwoord
     this.stemToAdd = new Stem_dto(0, antwoordID, +localStorage.getItem("userID"));
     this._pollService.addStem(this.stemToAdd).subscribe(
       stem => {
@@ -53,6 +54,7 @@ export class VoteComponent implements OnInit {
   }
 
   stemAnnuleren() {
+    //stem van current user verwijderen
     this.poll.antwoorden.map(a => {
       a.stemmen.map(s => {
         if (s.userID == +localStorage.getItem("userID")) {
