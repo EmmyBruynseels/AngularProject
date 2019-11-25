@@ -97,25 +97,21 @@ export class EditPollsComponent implements OnInit {
 
 
   addFriendToPoll(friendID) {
-    //user toevoegen aan poll
-    let altoegevoegd = false;
-    this.poll.users.map(u => {
-      u.userID == friendID ? altoegevoegd = true : this._snackBar.open("Deze user is al toegevoegd aan de poll" + this.poll.naam, "OK", {
-        duration: 3000,
-      });
+    //user toevoegen aan poll / tabel pollgebruikers
+    this.pgToAdd = new PollGebruiker_dto(this.poll.pollID, friendID, false);
+    this._pollService.addPollGebruiker2(this.pgToAdd).subscribe(result => {
+      if (result == null) {
+        this._snackBar.open("Deze user is al toegevoegd aan de poll " + this.poll.naam, "OK", {
+          duration: 3000,
+        });
+      }
+      this.ngOnInit();
     });
-    if (altoegevoegd == false) {
-      this.pgToAdd = new PollGebruiker_dto(this.poll.pollID, friendID, false);
-      this._pollService.addPollGebruiker(this.pgToAdd).subscribe(pg => {
-        this.ngOnInit();
-      });
-    }
-
   }
   deleteUser(userID: number) {
     //user verwijderen uit poll /(uit tabel pollgebruikers)
 
-    if(userID != this.userID) {
+    if (userID != this.userID) {
       //jezelf niet kunnen verwijderen
       this._pollService.deletePollGebruiker(this.poll.pollID, userID).subscribe(pg => {
         this.ngOnInit();

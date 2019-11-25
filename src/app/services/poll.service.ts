@@ -90,7 +90,10 @@ export class PollService {
   deletePollGebruiker(pollID: number, userID: number) {
     return this.http.delete<PollGebruiker>("https://localhost:5001/api/PollGebruiker/ByPollIDAndUserID?userID=" + userID + "&pollID=" + pollID);
   }
-
+  addPollGebruiker2(pg: PollGebruiker_dto) {
+    return this.http.post<PollGebruiker_dto>("https://localhost:5001/api/PollGebruiker/ByUserIDAndPollID", pg);
+  }
+  
 
   //USERS
   getUser(userID: number) {
