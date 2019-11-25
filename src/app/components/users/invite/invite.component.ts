@@ -48,7 +48,7 @@ export class InviteComponent implements OnInit {
       else {
         //email bestaat al
         //friendrequest sturen naar user met deze email
-        this.sendFriendRequest(this.friendIDBestaat);
+        this.sendFriendRequest(user.userID);
         this._snackBar.open("Friendrequest verstuurd", "OK", {
           duration: 3000,
         });
