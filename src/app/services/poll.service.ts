@@ -138,5 +138,8 @@ export class PollService {
   addFriend(friend: Friend_dto) {
     return this.http.post<Friend_dto>("https://localhost:5001/api/Friend", friend);
   }
+  deleteFriendByUserIDs(friendID: number) {
+    return this.http.delete<Friend>("https://localhost:5001/api/Friend/ByUserIDAndFriendID?userID=" + +localStorage.getItem("userID") + "&friendID=" + friendID);
+  }
 }
 

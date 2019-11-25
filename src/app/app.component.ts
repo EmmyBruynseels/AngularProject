@@ -29,16 +29,14 @@ export class AppComponent {
         var userID = localStorage.getItem("userID");
         if (+userID != 0) {
           this._pollService.getUser(+userID).subscribe(user => {
-            console.log(user.username);
             this.currentUser = user;
           });
         }
       });
-
-  
   }
   logoff(){
     this._authenticateService.logout();
+    this.currentUser= null;
   }
 
 

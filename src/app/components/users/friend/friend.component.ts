@@ -18,7 +18,7 @@ export class FriendComponent implements OnInit {
   constructor(private _pollService: PollService, private router: Router) { }
 
   ngOnInit() {
-    this.userFriends= [];
+    this.userFriends = [];
     this._pollService.getFriends().subscribe(friends => {
       friends.map(f => {
         if (f.ontvangerID.toString() == localStorage.getItem("userID")) {
@@ -36,18 +36,10 @@ export class FriendComponent implements OnInit {
   }
 
   delete(fr: User) {
-    //delete friend-object
-    let userID = +localStorage.getItem("userID");
-
-    this._pollService.getFriends().subscribe(friends => {
-      friends.map(f => {
-        if ((f.ontvangerID == userID && f.senderID == fr.userID) || (f.senderID == userID && f.ontvangerID == fr.userID)) {
-          this._pollService.deleteFriend(f.friendID).subscribe(f => {
-            this.ngOnInit();
-          });
-        }
-      });
+    //delete friend-object - friendID en current user(in functie toegevoegd)
+    this._pollService.deleteFriendByUserIDs(fr.userID).subscribe(f => {
+      this.ngOnInit();
     });
-    
+
   }
 }
