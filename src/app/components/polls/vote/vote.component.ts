@@ -20,7 +20,7 @@ export class VoteComponent implements OnInit {
   antwoordenBijPoll: Antwoord[];
   gestemd: boolean = false;
   totaalStemmen: number = 0;
-  users: User[] = [];
+  users: User[];
 
   constructor(private _pollService: PollService, private router: Router) { }
 
@@ -36,6 +36,7 @@ export class VoteComponent implements OnInit {
           }
         });
       });
+      this.users = [];
       this.poll.users.map(u => {
         this._pollService.getUser(u.userID).subscribe(user => {
           this.users.push(user);
@@ -58,7 +59,10 @@ export class VoteComponent implements OnInit {
     this.poll.antwoorden.map(a => {
       a.stemmen.map(s => {
         if (s.userID == +localStorage.getItem("userID")) {
-          this._pollService.deleteStem(s.stemID).subscribe();
+          this._pollService.deleteStem(s.stemID).subscribe( s=> {
+            this.ngOnInit();
+          }
+          );
           this.gestemd = false;
         }
       });

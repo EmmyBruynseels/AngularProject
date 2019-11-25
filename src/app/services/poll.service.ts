@@ -102,7 +102,10 @@ export class PollService {
     return this.http.post<User>("https://localhost:5001/api/user", user);
   }
   updateUser(user: User) {
-    return this.http.put<Friend>("https://localhost:5001/api/User/" + user.userID, user);
+    return this.http.put<User>("https://localhost:5001/api/User/" + user.userID, user);
+  }
+  getUserByEmail(email: string){
+    return this.http.get<User>("https://localhost:5001/api/User/ByEmail?email=" + email);
   }
 
 

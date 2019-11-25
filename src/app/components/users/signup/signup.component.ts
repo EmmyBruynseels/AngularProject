@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
     repeatPassword: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private _pollService: PollService, private router: Router,private _snackBar: MatSnackBar) { }
+  constructor(private fb: FormBuilder, private _pollService: PollService, private router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -35,46 +35,43 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     //user-object aanmaken
     const { username, email, password, repeatPassword } = this.createUserform.value;
+
     //validatie voor wachtwoord
     if (password == repeatPassword) {
-      let gelukt: boolean = false;
 
-      this._pollService.getUsers().subscribe(u => {
-        this.users = u;
-        this.users.map(user => {
-
-          if (user.email == email) {
-            
-            // als wachtwoord leeg is -> user-object aangemaakt door invite
-            // user-object updaten met username & wachtwoord
-            if (user.password == "" || user.password == null) {
-              this.userToAdd = new User(user.userID, username, user.email, password, user.token);
-              this._pollService.updateUser(this.userToAdd).subscribe(u => {
-                this._snackBar.open("Uw account "+ user.username +" werd aangemaakt al, (ga naar) login om u aan te melden", "OK", {
-                  duration: 3000,
-                });
-                gelukt = true;
-              });
-            }
-            //email bestaat & wachtwoord is niet leeg -> user bestaat al
-            else if (user.password != "" || user.password != null) {
-              this._snackBar.open("De user "+ user.username +" bestaat al, (ga naar) login", "OK", {
-                duration: 3000,
-              });
-              gelukt = true;
-            }
-          }
-        });
-        if (gelukt = false) {
+      //user met deze email ophalen
+      this._pollService.getUserByEmail(email).subscribe(user => {
+        console.log(user);
+        if (user == null) {
+          //email bestaat nog niet
+          //nieuwe user toevoegen met deze gegevens
           this.userToAdd = new User(0, username, email, password, null);
-          //nieuwe user toevoegen
           this._pollService.addUser(this.userToAdd).subscribe(
             user => {
-              this._snackBar.open("User met username " + user.username + " werd aangemaakt", "OK", {
+              this._snackBar.open("User met username " + user.username + " werd aangemaakt, ga naar login om u met deze gegevens aan te melden", "OK", {
                 duration: 3000,
               });
-            }
-          );
+            });
+        }
+        else {
+          //email bestaat al
+          if (user.password == null) {
+            // als wachtwoord leeg is -> user-object aangemaakt door invite
+            // user-object updaten met username & wachtwoord
+            this.userToAdd = new User(user.userID, username, user.email, password, user.token);
+            this._pollService.updateUser(this.userToAdd).subscribe(u => {
+              this._snackBar.open("Uw account " + u.username + " werd aangemaakt, (ga naar) login om u aan te melden", "OK", {
+                duration: 3000,
+              });
+            });
+          }
+          else {
+            //email bestaat al & wachtwoord is niet leeg
+            //deze user bestaat al -> naar inloggen
+            this._snackBar.open("De user " + user.username + " bestaat al, (ga naar) login", "OK", {
+              duration: 3000,
+            });
+          }
         }
       });
     }
