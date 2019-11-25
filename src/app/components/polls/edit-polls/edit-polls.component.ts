@@ -117,7 +117,7 @@ export class EditPollsComponent implements OnInit {
 
     if(userID != this.userID) {
       //jezelf niet kunnen verwijderen
-      this._pollService.deletePollGebruiker2(this.poll.pollID, userID).subscribe(pg => {
+      this._pollService.deletePollGebruiker(this.poll.pollID, userID).subscribe(pg => {
         this.ngOnInit();
       });
     }

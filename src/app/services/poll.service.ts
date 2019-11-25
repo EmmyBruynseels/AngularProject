@@ -87,10 +87,7 @@ export class PollService {
   getPollGebruikers() {
     return this.http.get<PollGebruiker[]>("https://localhost:5001/api/pollgebruiker");
   }
-  deletePollGebruiker(pgID: number) {
-    return this.http.delete<PollGebruiker>("https://localhost:5001/api/pollgebruiker/" + pgID);
-  }
-  deletePollGebruiker2(pollID: number, userID: number) {
+  deletePollGebruiker(pollID: number, userID: number) {
     return this.http.delete<PollGebruiker>("https://localhost:5001/api/PollGebruiker/ByPollIDAndUserID?userID=" + userID + "&pollID=" + pollID);
   }
 
