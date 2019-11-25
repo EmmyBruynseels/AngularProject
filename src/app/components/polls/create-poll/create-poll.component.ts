@@ -48,12 +48,17 @@ export class CreatePollComponent implements OnInit {
       antwoord: ['', Validators.required]
     });
     this._pollService.getFriendAndRequest().subscribe(friends => {
+      console.log(friends);
       friends.map(f => {
         if (f.ontvangerID.toString() == localStorage.getItem("userID")) {
-          this.userFriends.push(f.sender);
+          if (f.sender.username != null && f.sender.username != "" ) {
+            this.userFriends.push(f.sender);
+          }
         }
         else {
-          this.userFriends.push(f.ontvanger);
+          if (f.ontvanger.username != null && f.ontvanger.username != "") {
+            this.userFriends.push(f.ontvanger);
+          }
         }
       })
     });
@@ -123,7 +128,7 @@ export class CreatePollComponent implements OnInit {
     this._pollService.addPollGebruiker(this.pgToAdd).subscribe(pg => {
       this._snackBar.open(username + " werd toegevoegd aan poll " + this.addedPoll.naam, "OK", {
         duration: 3000,
-      });  
+      });
     });
   }
 }
