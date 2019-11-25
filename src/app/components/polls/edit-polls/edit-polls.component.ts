@@ -112,19 +112,15 @@ export class EditPollsComponent implements OnInit {
     }
 
   }
-  deleteUser(id: number) {
-    //user verwijderen uit poll
-    this._pollService.getPollGebruikers().subscribe(pollUsers => {
-      pollUsers.map(pg => {
+  deleteUser(userID: number) {
+    //user verwijderen uit poll /(uit tabel pollgebruikers)
 
-        if (pg.pollID == this.poll.pollID && pg.userID == id && id != this.userID) {
-
-          this._pollService.deletePollGebruiker(pg.pollGebruikerID).subscribe(result => {
-            this.ngOnInit();
-          });
-        }
+    if(userID != this.userID) {
+      //jezelf niet kunnen verwijderen
+      this._pollService.deletePollGebruiker2(this.poll.pollID, userID).subscribe(pg => {
+        this.ngOnInit();
       });
-    });
+    }
 
   }
   deletePoll() {

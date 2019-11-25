@@ -16,14 +16,14 @@ import { Friend, Friend_dto } from '../models/friend.model';
 export class PollService {
 
   poll: Poll_dto;
-  pollID : number;
+  pollID: number;
 
   constructor(private http: HttpClient) { }
 
   // getPollEdit() {
   //   return this.pollID;
   // }
-  setPoll(pollID: number){
+  setPoll(pollID: number) {
     this.pollID = pollID;
   }
 
@@ -46,7 +46,7 @@ export class PollService {
   getPoll() {
     return this.http.get<Poll_dto>("https://localhost:5001/api/Poll/" + this.pollID);
   }
-  deletePoll(pollID : number) {
+  deletePoll(pollID: number) {
     return this.http.delete<Poll>("https://localhost:5001/api/Poll/" + pollID);
   }
   addPoll(poll: Poll) {
@@ -55,7 +55,7 @@ export class PollService {
   getAllPolls() {
     return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll");
   }
-  
+
   //ANTWOORD
   getAntwoorden(): Observable<Antwoord[]> {
     return this.http.get<Antwoord[]>("https://localhost:5001/api/antwoord");
@@ -63,7 +63,7 @@ export class PollService {
   addAntwoord(antwoord: Antwoord_dto2) {
     return this.http.post<Antwoord_dto2>("https://localhost:5001/api/antwoord", antwoord);
   }
-  deleteAntwoord(antwoordID :number){
+  deleteAntwoord(antwoordID: number) {
     return this.http.delete<Antwoord>("https://localhost:5001/api/Antwoord/" + antwoordID);
   }
 
@@ -75,7 +75,7 @@ export class PollService {
     return this.http.get<Stem[]>("https://localhost:5001/api/stem");
   }
 
-  deleteStem(pollID: number){
+  deleteStem(pollID: number) {
     return this.http.delete<Stem>("https://localhost:5001/api/Stem/ByUserIDAndPollID?userID=" + +localStorage.getItem("userID") + "&pollID=" + pollID);
   }
 
@@ -84,11 +84,14 @@ export class PollService {
   addPollGebruiker(pg: PollGebruiker_dto) {
     return this.http.post<PollGebruiker_dto>("https://localhost:5001/api/pollgebruiker", pg);
   }
-  getPollGebruikers(){
+  getPollGebruikers() {
     return this.http.get<PollGebruiker[]>("https://localhost:5001/api/pollgebruiker");
   }
-  deletePollGebruiker(pgID :number) {
+  deletePollGebruiker(pgID: number) {
     return this.http.delete<PollGebruiker>("https://localhost:5001/api/pollgebruiker/" + pgID);
+  }
+  deletePollGebruiker2(pollID: number, userID: number) {
+    return this.http.delete<PollGebruiker>("https://localhost:5001/api/PollGebruiker/ByPollIDAndUserID?userID=" + userID + "&pollID=" + pollID);
   }
 
 
@@ -105,7 +108,7 @@ export class PollService {
   updateUser(user: User) {
     return this.http.put<User>("https://localhost:5001/api/User/" + user.userID, user);
   }
-  getUserByEmail(email: string){
+  getUserByEmail(email: string) {
     return this.http.get<User>("https://localhost:5001/api/User/ByEmail?email=" + email);
   }
 
