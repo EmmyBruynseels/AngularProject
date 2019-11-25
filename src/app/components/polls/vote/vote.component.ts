@@ -27,7 +27,7 @@ export class VoteComponent implements OnInit {
   ngOnInit() {
     this._pollService.getPoll().subscribe(result => {
       this.poll = result;
-      
+
       this.poll.antwoorden.map(a => {
         a.stemmen.map(s => {
           this.totaalStemmen++;
@@ -55,17 +55,14 @@ export class VoteComponent implements OnInit {
   }
 
   stemAnnuleren() {
-    //stem van current user verwijderen
-    this.poll.antwoorden.map(a => {
-      a.stemmen.map(s => {
-        if (s.userID == +localStorage.getItem("userID")) {
-          this._pollService.deleteStem(s.stemID).subscribe( s=> {
-            this.ngOnInit();
-          }
-          );
-          this.gestemd = false;
-        }
-      });
+    //stem uit current poll verwijderen (van current user)
+    this._pollService.deleteStem(this.poll.pollID).subscribe(stem => {
+      this.ngOnInit();
+      this.gestemd = false;
     });
+  }
+  
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
   }
 }

@@ -67,10 +67,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/addpoll']);
   }
 
-  goToPolls() {
-    this.router.navigate(['/poll']);
-  }
-
   goToInviteFriend() {
     this.router.navigate(['/invite']);
   }

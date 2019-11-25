@@ -133,4 +133,7 @@ export class EditPollsComponent implements OnInit {
       this.router.navigate(['/dashboard']);
     });
   }
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
 }

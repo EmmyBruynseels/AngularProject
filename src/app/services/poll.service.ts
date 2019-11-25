@@ -74,8 +74,9 @@ export class PollService {
   getStemmen(): Observable<Stem[]> {
     return this.http.get<Stem[]>("https://localhost:5001/api/stem");
   }
-  deleteStem(stemID: number){
-    return this.http.delete<Stem_dto>("https://localhost:5001/api/Stem/" + stemID);
+
+  deleteStem(pollID: number){
+    return this.http.delete<Stem>("https://localhost:5001/api/Stem/ByUserIDAndPollID?userID=" + +localStorage.getItem("userID") + "&pollID=" + pollID);
   }
 
 
