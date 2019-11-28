@@ -88,4 +88,10 @@ export class DashboardComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  decline(poll: Poll_dto) {
+    this._pollService.deletePollGebruiker(poll.pollID, +localStorage.getItem("userID")).subscribe(pg => {
+      this.ngOnInit();
+    });
+  }
 }

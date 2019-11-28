@@ -35,8 +35,8 @@ export class SecurityComponent implements OnInit {
       localStorage.setItem("token", result.token);
       localStorage.setItem("userID", result.userID.toString());
       this._authenticateService.isLoggedin.next(result.token ? true : false);
+      this.router.navigate(['/dashboard']);
     });
-    this.router.navigate(['/dashboard']);
   }
 
   goToSignup() {

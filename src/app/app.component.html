@@ -2,12 +2,14 @@
   <mat-sidenav-container class="nav-container">
     <mat-sidenav mode="side" opened="true">
       <mat-nav-list>
-        <a mat-list-item routerLink="/security" routerLinkActive="active"
+        <div mat-card-avatar class="logo"></div>
+
+        <!-- <a mat-list-item routerLink="/security" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Security/login</a>
         <a mat-list-item routerLink="/signup" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">signup</a>
           <a mat-list-item routerLink="/home" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">Home</a>
+          [routerLinkActiveOptions]="{ exact: true }">Home</a> -->
         <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
 
@@ -18,8 +20,6 @@
         </a>
         <a mat-list-item routerLink="/addpoll" routerLinkActive="active" class="submenu"
           [routerLinkActiveOptions]="{ exact: true }">Nieuwe Poll</a>
-        <!-- <a mat-list-item routerLink="/poll" routerLinkActive="active" class="submenu"
-          [routerLinkActiveOptions]="{ exact: true }">Polls</a> -->
 
         <mat-divider></mat-divider>
         <a mat-list-item class="menu">
@@ -27,18 +27,18 @@
           <p>Friends</p>
         </a>
         <a mat-list-item routerLink="/friend" routerLinkActive="active" class="submenu"
-        [routerLinkActiveOptions]="{ exact: true }">Friends</a>
+          [routerLinkActiveOptions]="{ exact: true }">Friends</a>
 
         <a mat-list-item routerLink="/invite" routerLinkActive="active" class="submenu"
           [routerLinkActiveOptions]="{ exact: true }">Uitnodigen</a>
 
-		  <mat-divider></mat-divider>
-        
+        <mat-divider></mat-divider>
+
         <a mat-list-item *ngIf="currentUser">
-				
+
           <mat-icon svgIcon="account" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
           <p> {{currentUser.username}}</p>
-            <button mat-raised-button color="primary" (click)="logoff()">Logout</button>
+          <button mat-raised-button color="primary" (click)="logoff()">Logout</button>
         </a>
 
       </mat-nav-list>

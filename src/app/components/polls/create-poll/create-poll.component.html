@@ -23,7 +23,7 @@
       </mat-form-field>
       <div>
         <button mat-button color="accent" (click)="createAntwoord()" [disabled]="!addAntwoordFormGroup.valid">(Nog een antwoord) toevoegen</button>
-        <button mat-button matStepperNext (click)="addAntwoord()">Next</button>
+        <button mat-button matStepperNext (click)="addAntwoord(stepper)">Next</button>
       </div>
     </form>
   </mat-step>

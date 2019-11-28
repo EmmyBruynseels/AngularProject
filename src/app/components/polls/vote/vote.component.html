@@ -17,11 +17,15 @@
 
           <button [disabled]="gestemd" mat-raised-button color="primary" (click)="stem(a.antwoordID)">Stem</button>
         </div>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between">
         <mat-progress-bar mode="determinate" value="{{ a.stemmen.length/totaalStemmen*100 | number }}">
         </mat-progress-bar>
-        <div>
-          <mat-divider></mat-divider>
-        </div>
+        {{ a.stemmen.length}}&nbsp;/&nbsp;{{totaalStemmen}}&nbsp;stemmen
+      </div>
+      <div>
+        <mat-divider></mat-divider>
+      </div>
 
       </div>
       <mat-card-actions>
