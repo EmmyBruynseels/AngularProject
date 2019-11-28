@@ -11,17 +11,17 @@ import { User } from 'src/app/models/user.model';
 })
 export class HomeComponent implements OnInit {
 
-  users: User[];
-  polls: Poll_dto[];
+  aantalUsers : number;
+  aantalPolls: number;
   constructor(private _pollService: PollService, private router: Router) { }
 
   ngOnInit() {
-    this._pollService.getAllPolls().subscribe(polls => {
-      this.polls = polls;
+    this._pollService.getAantalPolls().subscribe( p =>{
+      this.aantalPolls = p;
     });
-    this._pollService.getUsers().subscribe(users => {
-      this.users = users;
-    })
+    this._pollService.getAantalUsers().subscribe( u=> {
+      this.aantalUsers = u;
+    });
   }
 
   goToSignup() {

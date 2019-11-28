@@ -55,6 +55,9 @@ export class PollService {
   getAllPolls() {
     return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll");
   }
+  getAantalPolls() {
+    return this.http.get<number>("https://localhost:5001/api/Poll/aantalPolls");
+  }
 
   //ANTWOORD
   getAntwoorden(): Observable<Antwoord[]> {
@@ -110,6 +113,9 @@ export class PollService {
   }
   getUserByEmail(email: string) {
     return this.http.get<User>("https://localhost:5001/api/User/ByEmail?email=" + email);
+  }
+  getAantalUsers() {
+    return this.http.get<number>("https://localhost:5001/api/User/aantalUsers");
   }
 
 
