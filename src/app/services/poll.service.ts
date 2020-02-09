@@ -33,122 +33,122 @@ export class PollService {
        headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
      });*/
     var userID = localStorage.getItem("userID");
-    return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll/polls?userID=" + +userID);
+    return this.http.get<Poll_dto[]>("https://polllabs.azurewebsites.net/api/Poll/polls?userID=" + +userID);
   }
   getPollsAdmin() {
     var userID = localStorage.getItem("userID");
-    return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll/pollsAdmin?userID=" + +userID);
+    return this.http.get<Poll_dto[]>("https://polllabs.azurewebsites.net/api/Poll/pollsAdmin?userID=" + +userID);
   }
   getPollsUitgenodigd() {
     var userID = localStorage.getItem("userID");
-    return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll/pollsUser?userID=" + +userID);
+    return this.http.get<Poll_dto[]>("https://polllabs.azurewebsites.net/api/Poll/pollsUser?userID=" + +userID);
   }
   getPoll() {
-    return this.http.get<Poll_dto>("https://localhost:5001/api/Poll/" + this.pollID);
+    return this.http.get<Poll_dto>("https://polllabs.azurewebsites.net/api/Poll/" + this.pollID);
   }
   deletePoll(pollID: number) {
-    return this.http.delete<Poll>("https://localhost:5001/api/Poll/" + pollID);
+    return this.http.delete<Poll>("https://polllabs.azurewebsites.net/api/Poll/" + pollID);
   }
   addPoll(poll: Poll) {
-    return this.http.post<Poll>("https://localhost:5001/api/poll", poll);
+    return this.http.post<Poll>("https://polllabs.azurewebsites.net/api/poll", poll);
   }
   getAllPolls() {
-    return this.http.get<Poll_dto[]>("https://localhost:5001/api/Poll");
+    return this.http.get<Poll_dto[]>("https://polllabs.azurewebsites.net/api/Poll");
   }
   getAantalPolls() {
-    return this.http.get<number>("https://localhost:5001/api/Poll/aantalPolls");
+    return this.http.get<number>("https://polllabs.azurewebsites.net/api/Poll/aantalPolls");
   }
 
   //ANTWOORD
   getAntwoorden(): Observable<Antwoord[]> {
-    return this.http.get<Antwoord[]>("https://localhost:5001/api/antwoord");
+    return this.http.get<Antwoord[]>("https://polllabs.azurewebsites.net/api/antwoord");
   }
   addAntwoord(antwoord: Antwoord_dto2) {
-    return this.http.post<Antwoord_dto2>("https://localhost:5001/api/antwoord", antwoord);
+    return this.http.post<Antwoord_dto2>("https://polllabs.azurewebsites.net/api/antwoord", antwoord);
   }
   deleteAntwoord(antwoordID: number) {
-    return this.http.delete<Antwoord>("https://localhost:5001/api/Antwoord/" + antwoordID);
+    return this.http.delete<Antwoord>("https://polllabs.azurewebsites.net/api/Antwoord/" + antwoordID);
   }
 
   //STEMMEN
   addStem(stem: Stem_dto) {
-    return this.http.post<Stem_dto>("https://localhost:5001/api/stem", stem);
+    return this.http.post<Stem_dto>("https://polllabs.azurewebsites.net/api/stem", stem);
   }
   getStemmen(): Observable<Stem[]> {
-    return this.http.get<Stem[]>("https://localhost:5001/api/stem");
+    return this.http.get<Stem[]>("https://polllabs.azurewebsites.net/api/stem");
   }
 
   deleteStem(pollID: number) {
-    return this.http.delete<Stem>("https://localhost:5001/api/Stem/ByUserIDAndPollID?userID=" + +localStorage.getItem("userID") + "&pollID=" + pollID);
+    return this.http.delete<Stem>("https://polllabs.azurewebsites.net/api/Stem/ByUserIDAndPollID?userID=" + +localStorage.getItem("userID") + "&pollID=" + pollID);
   }
 
 
   //POLLGEBRUIKERS
   addPollGebruiker(pg: PollGebruiker_dto) {
-    return this.http.post<PollGebruiker_dto>("https://localhost:5001/api/pollgebruiker", pg);
+    return this.http.post<PollGebruiker_dto>("https://polllabs.azurewebsites.net/api/pollgebruiker", pg);
   }
   getPollGebruikers() {
-    return this.http.get<PollGebruiker[]>("https://localhost:5001/api/pollgebruiker");
+    return this.http.get<PollGebruiker[]>("https://polllabs.azurewebsites.net/api/pollgebruiker");
   }
   deletePollGebruiker(pollID: number, userID: number) {
-    return this.http.delete<PollGebruiker>("https://localhost:5001/api/PollGebruiker/ByPollIDAndUserID?userID=" + userID + "&pollID=" + pollID);
+    return this.http.delete<PollGebruiker>("https://polllabs.azurewebsites.net/api/PollGebruiker/ByPollIDAndUserID?userID=" + userID + "&pollID=" + pollID);
   }
   addPollGebruiker2(pg: PollGebruiker_dto) {
-    return this.http.post<PollGebruiker_dto>("https://localhost:5001/api/PollGebruiker/ByUserIDAndPollID", pg);
+    return this.http.post<PollGebruiker_dto>("https://polllabs.azurewebsites.net/api/PollGebruiker/ByUserIDAndPollID", pg);
   }
   
 
   //USERS
   getUser(userID: number) {
-    return this.http.get<User>("https://localhost:5001/api/user/" + userID);
+    return this.http.get<User>("https://polllabs.azurewebsites.net/api/user/" + userID);
   }
   getUsers() {
-    return this.http.get<User[]>("https://localhost:5001/api/User");
+    return this.http.get<User[]>("https://polllabs.azurewebsites.net/api/User");
   }
   addUser(user: User) {
-    return this.http.post<User>("https://localhost:5001/api/user", user);
+    return this.http.post<User>("https://polllabs.azurewebsites.net/api/user", user);
   }
   updateUser(user: User) {
-    return this.http.put<User>("https://localhost:5001/api/User/" + user.userID, user);
+    return this.http.put<User>("https://polllabs.azurewebsites.net/api/User/" + user.userID, user);
   }
   getUserByEmail(email: string) {
-    return this.http.get<User>("https://localhost:5001/api/User/ByEmail?email=" + email);
+    return this.http.get<User>("https://polllabs.azurewebsites.net/api/User/ByEmail?email=" + email);
   }
   getAantalUsers() {
-    return this.http.get<number>("https://localhost:5001/api/User/aantalUsers");
+    return this.http.get<number>("https://polllabs.azurewebsites.net/api/User/aantalUsers");
   }
 
 
   //FRIENDS
   getFriendRequests() {
     const userID = localStorage.getItem("userID");
-    return this.http.get<Friend[]>("https://localhost:5001/api/Friend/friendRequests?userID=" + +userID);
+    return this.http.get<Friend[]>("https://polllabs.azurewebsites.net/api/Friend/friendRequests?userID=" + +userID);
   }
   getFriends() {
     const userID = localStorage.getItem("userID");
-    return this.http.get<Friend[]>("https://localhost:5001/api/Friend/friends?userID=" + +userID);
+    return this.http.get<Friend[]>("https://polllabs.azurewebsites.net/api/Friend/friends?userID=" + +userID);
   }
   getFriendAndRequest() {
     const userID = localStorage.getItem("userID");
-    return this.http.get<Friend[]>("https://localhost:5001/api/Friend/allForUser?userID=" + +userID);
+    return this.http.get<Friend[]>("https://polllabs.azurewebsites.net/api/Friend/allForUser?userID=" + +userID);
   }
   getFriend(friendID: number) {
-    return this.http.get<Friend>("https://localhost:5001/api/Friend/" + friendID);
+    return this.http.get<Friend>("https://polllabs.azurewebsites.net/api/Friend/" + friendID);
   }
   getAllFriends() {
-    return this.http.get<Friend[]>("https://localhost:5001/api/Friend");
+    return this.http.get<Friend[]>("https://polllabs.azurewebsites.net/api/Friend");
   }
   updateFriend(friend: Friend) {
-    return this.http.put<Friend>("https://localhost:5001/api/Friend/" + friend.friendID, friend);
+    return this.http.put<Friend>("https://polllabs.azurewebsites.net/api/Friend/" + friend.friendID, friend);
   }
   deleteFriend(friendID: number) {
-    return this.http.delete<Friend>("https://localhost:5001/api/Friend/" + friendID);
+    return this.http.delete<Friend>("https://polllabs.azurewebsites.net/api/Friend/" + friendID);
   }
   addFriend(friend: Friend_dto) {
-    return this.http.post<Friend_dto>("https://localhost:5001/api/Friend", friend);
+    return this.http.post<Friend_dto>("https://polllabs.azurewebsites.net/api/Friend", friend);
   }
   deleteFriendByUserIDs(friendID: number) {
-    return this.http.delete<Friend>("https://localhost:5001/api/Friend/ByUserIDAndFriendID?userID=" + +localStorage.getItem("userID") + "&friendID=" + friendID);
+    return this.http.delete<Friend>("https://polllabs.azurewebsites.net/api/Friend/ByUserIDAndFriendID?userID=" + +localStorage.getItem("userID") + "&friendID=" + friendID);
   }
 }
 

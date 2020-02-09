@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false
+    production: false,
+    firebase:  {
+        apiKey: "AIzaSyBjOOAxzR_HJXViybh_kcOv78vaheUtTvo",
+        authDomain: "polllab.firebaseapp.com",
+        databaseURL: "https://polllab.firebaseio.com",
+        projectId: "polllab",
+        storageBucket: "polllab.appspot.com",
+        messagingSenderId: "508528158914",
+        appId: "1:508528158914:web:3f2c8cdb02bea812fb735b"
+      }
 };
 
 /*

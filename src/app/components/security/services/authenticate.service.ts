@@ -17,7 +17,7 @@ export class AuthenticateService {
 
     constructor(private _httpClient: HttpClient, private router: Router) { }
     authenticate(userLogin: UserLogin): Observable<User> {
-        return this._httpClient.post<User>("https://localhost:5001/api/User/authenticate", userLogin);
+        return this._httpClient.post<User>("https://polllabs.azurewebsites.net/api/User/authenticate", userLogin);
     }
 
     logout() {
